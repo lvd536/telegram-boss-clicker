@@ -10,14 +10,14 @@ public class DBMethods
     {
         using (ApplicationContext db = new ApplicationContext())
         {
-            var Player = db.Users.FirstOrDefault(u => u.Id == message.Id);
+            var Player = db.Users.FirstOrDefault(u => u.ChatId == message.Chat.Id);
             if (Player is not null)
             {
                 Console.WriteLine("[Debug] Player already exists.");
             }
             else
             { 
-               Player p = new Player {Username = message.From.Username ?? message.MessageId.ToString(), Level = 1, Cashiers = 10, Experience = 0, Money = 100, Rank = "Новичок", Damage = 1, Elo = 0};
+               var p = new Player {ChatId = message.Chat.Id, Username = message.From?.Username ?? message.MessageId.ToString(), Level = 1, Cashiers = 10, Experience = 0, Money = 100, Rank = "Новичок", Damage = 1, Elo = 0};
                await db.Users.AddAsync(p);
                await db.SaveChangesAsync();
             }

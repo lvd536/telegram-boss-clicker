@@ -2,10 +2,13 @@
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using ClickerBot.Game;
+using ClickerBot.Game.Start;
 
 using var cts = new CancellationTokenSource();
 var bot = new TelegramBotClient("7557004382:AAFSqf56fgYQWHvpg1VU6zGJxJ_mdaQnkTI", cancellationToken: cts.Token);
 var me = await bot.GetMe();
+var startCommand = new StartCommand();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
 bot.OnError += OnError;
@@ -25,9 +28,9 @@ async Task OnMessage(Message msg, UpdateType type)
         switch (command)
         {
             case "/start":
-                /*Task backgroundStartCmdTask =  Task.Run(async () => 
-                    await startCommand.StartCmd(bot, msg, type)
-                );*/
+                Task backgroundStartCmdTask =  Task.Run(async () => 
+                    await startCommand.StartCmd(bot, type, msg)
+                );
                 break;
             
             case "/weather":
@@ -62,12 +65,10 @@ async Task OnCallbackQuery(Update update)
     if (update.Type != UpdateType.CallbackQuery) return;
     switch (update.CallbackQuery?.Data)
     {
-        case "weatherCall":
-            break;
-        case "startCall":
-            /*Task backgroundStartCallBackTask =  Task.Run(async () => 
-                await startCommand.StartCmd(bot, update.CallbackQuery.Message ?? new Message(), update.Type)
-            );*/
+        case "OnClick":
+            Task backgroundStartCallBackTask =  Task.Run(async () => 
+                await startCommand.StartCallback(bot, update, update.CallbackQuery.Message ?? new Message())
+            );
             break;
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Design;
 public class Player
 {
     public int Id { get; set; }
+    public long ChatId { get; set; }
     public string Username { get; set; }
     public int Level { get; set; }
     public int Elo { get; set; }
