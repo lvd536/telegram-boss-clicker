@@ -3,12 +3,14 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using ClickerBot.Game;
+using ClickerBot.Game.Clicker.Callbacks;
 using ClickerBot.Game.Start;
 
 using var cts = new CancellationTokenSource();
 var bot = new TelegramBotClient("7557004382:AAFSqf56fgYQWHvpg1VU6zGJxJ_mdaQnkTI", cancellationToken: cts.Token);
 var me = await bot.GetMe();
 var startCommand = new StartCommand();
+var clickerCall = new ClickerCallback();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
 bot.OnError += OnError;
@@ -32,23 +34,21 @@ async Task OnMessage(Message msg, UpdateType type)
                     await startCommand.StartCmd(bot, type, msg)
                 );
                 break;
+
+            case "/click":
+                Task backgroundStartCallBackTask =  Task.Run(async () => 
+                    await clickerCall.ClickCallback(bot, msg)
+                );
+                break;
             
-            case "/weather":
+            case "test":
                 if (argument is not null)
                 {
-                    /*Task backgroundDefaultWeatherTask =  Task.Run(async () => 
-                        await weatherCommand.WeatherCmd(bot, msg, type, argument)
-                    );*/
                 }
                 else if (defArgument is not null)
                 {
                     switch (commandParts[1])
                     {
-                        /*case "auto":
-                            Task backgroundAutoWeatherTask =  Task.Run(async () => 
-                                await weatherCommand.WeatherAutoCmd(bot, msg, type, commandParts[2])
-                            );
-                            break;*/
                     }
                 }
                 break;
@@ -67,7 +67,7 @@ async Task OnCallbackQuery(Update update)
     {
         case "OnClick":
             Task backgroundStartCallBackTask =  Task.Run(async () => 
-                await startCommand.StartCallback(bot, update, update.CallbackQuery.Message ?? new Message())
+                await clickerCall.ClickCallback(bot, update.CallbackQuery.Message ?? new Message())
             );
             break;
     }

@@ -29,6 +29,17 @@ public class Items
     public short Level { get; set; }
 }
 
+public class Boss
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Level { get; set; }
+    public int Health { get; set; }
+    public int Experience { get; set; }
+    public long Money { get; set; }
+    public long Cashiers { get; set; }
+}
+
 public class ApplicationContext : DbContext
 {
     public DbSet<Player> Users => Set<Player>();

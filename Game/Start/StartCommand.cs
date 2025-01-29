@@ -25,23 +25,4 @@ public class StartCommand
         });
         await botClient.SendMessage(msg.Chat.Id, "Добро пожаловать в Кликер игру!", parseMode: ParseMode.Html, replyMarkup: keyboard);
     }
-
-    public async Task StartCallback(ITelegramBotClient botClient, Update type, Message msg)
-    {
-        //await botClient.SendMessage(msg.Chat.Id, "test", ParseMode.Html);
-        await using (ApplicationContext db = new ApplicationContext())
-        {
-            var _userData = db.Users.FirstOrDefault(u => u.ChatId == msg.Chat.Id);
-            if (_userData is not null)
-            {
-                _userData.Money++;
-                await db.SaveChangesAsync();
-                await botClient.SendMessage(msg.Chat.Id, $"Earned +1. Balance: {_userData.Money}", parseMode: ParseMode.Html);
-            }
-            else
-            {
-                await DBMethods.CreatePlayerAsync(msg);
-            }
-        }
-    }
 }
