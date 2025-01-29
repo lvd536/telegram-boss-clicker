@@ -30,9 +30,11 @@ public class ClickerCallback
                     {
                         var bossExp = _userData.Boss.Experience;
                         var bossMoney = _userData.Boss.Money;
+                        var bossCashiers = _userData.Boss.Cashiers;
                         var bossName = _userData.Boss.Name;
 
                         _userData.Money += bossMoney;
+                        _userData.Cashiers += bossCashiers;
                         _userData.Experience += (long)bossExp;
 
                         _userData.Boss = new Database.Boss
@@ -47,7 +49,7 @@ public class ClickerCallback
 
                         await db.SaveChangesAsync();
                         await botClient.SendMessage(msg.Chat.Id,
-                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰 и {bossExp} XP" +
+                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {_userData.Cashiers} Алмазов и {bossExp} XP" +
                             $"\nТекущая статистика:" +
                             $"\nУровень: {_userData.Level}" +
                             $"\nОпыт: {_userData.Experience}" +
