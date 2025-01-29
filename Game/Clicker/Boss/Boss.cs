@@ -43,7 +43,6 @@ public static class Boss
             catch (Exception ex)
             {
                 Console.WriteLine($"BossMain Error: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
             }
         }
     }

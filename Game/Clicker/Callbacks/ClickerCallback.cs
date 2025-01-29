@@ -72,7 +72,6 @@ public class ClickerCallback
             catch (Exception ex)
             {
                 Console.WriteLine($"ClickCallback Error: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
             }
         }
     }
