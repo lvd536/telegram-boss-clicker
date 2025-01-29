@@ -2,7 +2,6 @@
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using ClickerBot.Game;
 using ClickerBot.Game.Clicker.Callbacks;
 using ClickerBot.Game.Start;
 
