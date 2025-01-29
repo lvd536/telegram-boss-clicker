@@ -7,7 +7,7 @@ using ClickerBot.Game.Clicker.Callbacks;
 using ClickerBot.Game.Start;
 
 using var cts = new CancellationTokenSource();
-var bot = new TelegramBotClient("7557004382:AAFSqf56fgYQWHvpg1VU6zGJxJ_mdaQnkTI", cancellationToken: cts.Token);
+var bot = new TelegramBotClient("7371147310:AAEwln2CDIWVzYNTFHMdUwbzyzHod1qgDDQ", cancellationToken: cts.Token);
 var me = await bot.GetMe();
 var startCommand = new StartCommand();
 var clickerCall = new ClickerCallback();
@@ -30,13 +30,13 @@ async Task OnMessage(Message msg, UpdateType type)
         switch (command)
         {
             case "/start":
-                Task backgroundStartCmdTask =  Task.Run(async () => 
-                    await startCommand.StartCmd(bot, type, msg)
+                await Task.Run(async () => 
+                    await startCommand.StartCmd(bot, msg)
                 );
                 break;
 
             case "/click":
-                Task backgroundStartCallBackTask =  Task.Run(async () => 
+                await Task.Run(async () => 
                     await clickerCall.ClickCallback(bot, msg)
                 );
                 break;
@@ -44,6 +44,7 @@ async Task OnMessage(Message msg, UpdateType type)
             case "test":
                 if (argument is not null)
                 {
+                    
                 }
                 else if (defArgument is not null)
                 {
@@ -53,7 +54,7 @@ async Task OnMessage(Message msg, UpdateType type)
                 }
                 break;
             case "/profile":
-                
+                await bot.SendMessage(msg.Chat.Id, "Test", ParseMode.Html);
                 break;
         }
     }

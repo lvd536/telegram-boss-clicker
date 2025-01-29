@@ -8,9 +8,11 @@ namespace ClickerBot.Game.Start;
 
 public class StartCommand
 {
-    public async Task StartCmd(ITelegramBotClient botClient, UpdateType type, Message msg)
+    public async Task StartCmd(ITelegramBotClient botClient, Message msg)
     {
+        Console.WriteLine("StartCommand INIT");
         await DBMethods.CreatePlayerAsync(msg);
+        Console.WriteLine("StartCommand Created");
         var keyboard = new InlineKeyboardMarkup(new[]
         {
             new[]
@@ -23,6 +25,8 @@ public class StartCommand
                 InlineKeyboardButton.WithUrl("⭐️ GitHub source проекта", "https://github.com/lvd536"),
             }
         });
-        await botClient.SendMessage(msg.Chat.Id, "Добро пожаловать в Кликер игру!", parseMode: ParseMode.Html, replyMarkup: keyboard);
+        Console.WriteLine("StartCommand Sending");
+        await botClient.SendMessage(msg.Chat.Id, "Добро пожаловать в Кликер игру!", parseMode: ParseMode.Html,
+            replyMarkup: keyboard);
     }
 }

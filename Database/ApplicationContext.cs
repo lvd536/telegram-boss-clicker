@@ -15,6 +15,15 @@ public class Player
     public long Money { get; set; }
     public long Cashiers { get; set; }
     public long Damage { get; set; }
+    public Boss Boss { get; set; } = new Boss
+    {
+        Name = "",
+        Level = 1,
+        Health = 0,
+        Experience = 0,
+        Money = 0,
+        Cashiers = 0
+    };
     public List<Items> Items { get; set; } = new List<Items>();
 
 }
@@ -32,10 +41,10 @@ public class Items
 public class Boss
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public int Level { get; set; }
     public int Health { get; set; }
-    public int Experience { get; set; }
+    public double Experience { get; set; }
     public long Money { get; set; }
     public long Cashiers { get; set; }
 }
@@ -43,14 +52,22 @@ public class Boss
 public class ApplicationContext : DbContext
 {
     public DbSet<Player> Users => Set<Player>();
+    /*public DbSet<Boss> Bosses => Set<Boss>();
+    public DbSet<Items> Items => Set<Items>();*/
     public ApplicationContext()
     {
-        Database.Migrate();
+        Database.EnsureCreated();
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("Data Source=database.db");
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Player>()
+            .OwnsOne(p => p.Boss);
     }
 }
 

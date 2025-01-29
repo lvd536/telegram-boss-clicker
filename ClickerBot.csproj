@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Game\Shop\" />
+      <Folder Include="Game\Clicker\Shop\" />
     </ItemGroup>
 
 </Project>

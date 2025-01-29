@@ -1,4 +1,5 @@
 ﻿using ClickerBot.Database;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -11,17 +12,65 @@ public class ClickerCallback
     {
         await using (ApplicationContext db = new ApplicationContext())
         {
-            var _userData = db.Users.FirstOrDefault(u => u.ChatId == msg.Chat.Id);
-            if (_userData is not null)
+            try
             {
-                _userData.Money++;
-                await db.SaveChangesAsync();
-                await botClient.SendMessage(msg.Chat.Id, $"Earned +1. Balance: {_userData.Money}", parseMode: ParseMode.Html);
+                var _userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
+
+                if (_userData is not null)
+                {
+                    if (_userData.Boss == null || _userData.Boss.Health <= 0 || string.IsNullOrEmpty(_userData.Boss.Name))
+                    {
+                        await Boss.Boss.BossMain(msg);
+                        _userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
+                    }
+                    
+                    _userData.Boss.Health -= Convert.ToInt32(_userData.Damage);
+
+                    if (_userData.Boss.Health <= 0)
+                    {
+                        var bossExp = _userData.Boss.Experience;
+                        var bossMoney = _userData.Boss.Money;
+                        var bossName = _userData.Boss.Name;
+
+                        _userData.Money += bossMoney;
+                        _userData.Experience += (long)bossExp;
+
+                        _userData.Boss = new Database.Boss
+                        {
+                            Name = string.Empty,
+                            Level = 0,
+                            Health = 0,
+                            Experience = 0,
+                            Money = 0,
+                            Cashiers = 0
+                        };
+
+                        await db.SaveChangesAsync();
+                        await botClient.SendMessage(msg.Chat.Id,
+                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰 и {bossExp} XP" +
+                            $"\nТекущая статистика:" +
+                            $"\nУровень: {_userData.Level}" +
+                            $"\nОпыт: {_userData.Experience}" +
+                            $"\nМонет: {_userData.Money}" +
+                            $"\nАлмазов: {_userData.Cashiers}");
+                    }
+                    else
+                    {
+                        await db.SaveChangesAsync();
+                        await botClient.SendMessage(msg.Chat.Id,
+                            $"Вы нанесли боссу {_userData.Boss.Name} {_userData.Damage} урона.\nОсталось {_userData.Boss.Health} ХП", ParseMode.Html);
+                    }
+                }
+                else
+                {
+                    await botClient.SendMessage(msg.Chat.Id,"Похоже вы еще не зарегистрированы в нашей базе. Сейчас исправим!", ParseMode.Html);
+                    await DBMethods.CreatePlayerAsync(msg);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await botClient.SendMessage(msg.Chat.Id, "Похоже вы еще не зарегистрированы в нашей базе. Сейчас исправим!", ParseMode.Html);
-                await DBMethods.CreatePlayerAsync(msg);
+                Console.WriteLine($"ClickCallback Error: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
             }
         }
     }
