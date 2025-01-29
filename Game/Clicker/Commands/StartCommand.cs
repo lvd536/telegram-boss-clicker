@@ -10,9 +10,8 @@ public class StartCommand
 {
     public async Task StartCmd(ITelegramBotClient botClient, Message msg)
     {
-        Console.WriteLine("StartCommand INIT");
         await DBMethods.CreatePlayerAsync(msg);
-        Console.WriteLine("StartCommand Created");
+
         var keyboard = new InlineKeyboardMarkup(new[]
         {
             new[]

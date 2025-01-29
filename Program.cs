@@ -54,7 +54,7 @@ async Task OnMessage(Message msg, UpdateType type)
                 }
                 break;
             case "/profile":
-                await bot.SendMessage(msg.Chat.Id, "Test", ParseMode.Html);
+
                 break;
         }
     }

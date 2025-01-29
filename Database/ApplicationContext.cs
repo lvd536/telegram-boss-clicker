@@ -52,8 +52,6 @@ public class Boss
 public class ApplicationContext : DbContext
 {
     public DbSet<Player> Users => Set<Player>();
-    /*public DbSet<Boss> Bosses => Set<Boss>();
-    public DbSet<Items> Items => Set<Items>();*/
     public ApplicationContext()
     {
         Database.EnsureCreated();
