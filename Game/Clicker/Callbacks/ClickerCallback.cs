@@ -69,8 +69,12 @@ public class ClickerCallback
                     else
                     {
                         await db.SaveChangesAsync();
-                        await botClient.SendMessage(msg.Chat.Id,
-                            $"Вы нанесли боссу {_userData.Boss.Name} {_userData.Damage} урона.\nОсталось {_userData.Boss.Health} ХП", ParseMode.Html);
+                        var message =
+                            ($"Вы нанесли боссу {_userData.Boss.Name} {_userData.Damage} урона.\n" +
+                             $"Уровень босса: {_userData.Boss.Level}\n" +
+                             $"Осталось: {_userData.Boss.Health} ХП"
+                            );
+                        await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html);
                     }
                 }
                 else
