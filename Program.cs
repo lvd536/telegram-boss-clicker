@@ -11,6 +11,7 @@ var bot = new TelegramBotClient("7371147310:AAEwln2CDIWVzYNTFHMdUwbzyzHod1qgDDQ"
 var me = await bot.GetMe();
 var startCommand = new StartCommand();
 var profileCommand = new Profile();
+var userNameCall = new ChangeNameCallback();
 var clickerCall = new ClickerCallback();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
@@ -42,17 +43,17 @@ async Task OnMessage(Message msg, UpdateType type)
                 );
                 break;
             
-            case "test":
+            case "/setname":
                 if (argument is not null)
                 {
-                    
+                    await userNameCall.ChangeNameAsync(bot, msg, argument);
                 }
-                else if (defArgument is not null)
+                /*else if (defArgument is not null)
                 {
                     switch (commandParts[1])
                     {
                     }
-                }
+                }*/
                 break;
             case "/profile":
                 await Task.Run(async () => 
@@ -70,9 +71,17 @@ async Task OnCallbackQuery(Update update)
     switch (update.CallbackQuery?.Data)
     {
         case "OnClick":
-            Task backgroundStartCallBackTask =  Task.Run(async () => 
+            await Task.Run(async () => 
                 await clickerCall.ClickCallback(bot, update.CallbackQuery.Message ?? new Message())
             );
+            break;
+        case "Profile":
+            await Task.Run(async () => 
+                await profileCommand.ProfileCmdAsync(bot, update.CallbackQuery.Message ?? new Message())
+            );
+            break;
+        case "ChangeName":
+            await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id, "Чтобы изменить имя вам необохдимо написать: /setname Nick");
             break;
     }
 }

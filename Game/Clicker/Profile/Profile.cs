@@ -1,4 +1,5 @@
 ﻿namespace ClickerBot.Game.Clicker.Profile;
+using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -23,16 +24,25 @@ public class Profile
                 var bossName = userData.Boss.Name;
 
                 var message = ($"Ваш игровой персонаж:\n" +
-                           $"Ник: {userName}\n" +
-                           $"Уровень: {level}\n" +
-                           $"Опыт: {exp}\n" +
-                           $"Монет: {money}\n" +
-                           $"Алмазов: {cashiers}\n" +
-                           $"Имя текущего босса: {bossName}\n" +
-                           $"ChatId: {chatId}"
+                           $"🤵Ник: {userName}\n" +
+                           $"🚀Уровень: {level}\n" +
+                           $"🌟Опыт: {exp}\n" +
+                           $"💰Монет: {money}\n" +
+                           $"💎Алмазов: {cashiers}\n" +
+                           $"☠️Имя текущего босса: {bossName}\n" +
+                           $"📚ChatId: {chatId}"
                 );
+
+                var keyboard = new InlineKeyboardMarkup(new[]
+                {
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
+                        InlineKeyboardButton.WithCallbackData("📝Установить имя", "ChangeName")
+                    }
+                });
                 
-                await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html);
+                await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);
             }
             else
             {

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace ClickerBot.Game.Clicker.Callbacks;
 
@@ -50,13 +51,20 @@ public class ClickerCallback
 
                         await db.SaveChangesAsync();
                         await LevelUp.LevelUpAsync(botClient, msg);
-                        await botClient.SendMessage(msg.Chat.Id,
-                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {_userData.Cashiers} Алмазов и {bossExp} XP" +
-                            $"\nТекущая статистика:" +
-                            $"\nУровень: {_userData.Level}" +
-                            $"\nОпыт: {_userData.Experience}" +
-                            $"\nМонет: {_userData.Money}" +
-                            $"\nАлмазов: {_userData.Cashiers}");
+                        var message = (
+                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {_userData.Cashiers}💎  и {bossExp}🌟"
+                        );
+
+                        var keyboard = new InlineKeyboardMarkup(new[]
+                        {
+                            new[]
+                            {
+                                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
+                                InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
+                            }
+                        });
+                        
+                        await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);
                     }
                     else
                     {
