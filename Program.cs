@@ -3,12 +3,14 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using ClickerBot.Game.Clicker.Callbacks;
+using ClickerBot.Game.Clicker.Profile;
 using ClickerBot.Game.Start;
 
 using var cts = new CancellationTokenSource();
 var bot = new TelegramBotClient("7371147310:AAEwln2CDIWVzYNTFHMdUwbzyzHod1qgDDQ", cancellationToken: cts.Token);
 var me = await bot.GetMe();
 var startCommand = new StartCommand();
+var profileCommand = new Profile();
 var clickerCall = new ClickerCallback();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
@@ -53,7 +55,9 @@ async Task OnMessage(Message msg, UpdateType type)
                 }
                 break;
             case "/profile":
-
+                await Task.Run(async () => 
+                    await profileCommand.ProfileCmdAsync(bot, msg)
+                );
                 break;
         }
     }

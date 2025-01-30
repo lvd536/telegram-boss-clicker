@@ -1,4 +1,5 @@
 ﻿using ClickerBot.Database;
+using ClickerBot.Game.Clicker.Profile;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -48,6 +49,7 @@ public class ClickerCallback
                         };
 
                         await db.SaveChangesAsync();
+                        await LevelUp.LevelUpAsync(botClient, msg);
                         await botClient.SendMessage(msg.Chat.Id,
                             $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {_userData.Cashiers} Алмазов и {bossExp} XP" +
                             $"\nТекущая статистика:" +
