@@ -23,10 +23,14 @@ public class Profile
                 var chatId = userData.ChatId;
                 var bossName = userData.Boss.Name;
 
+                var requiredExp = LevelUp.GetRequiredExp(level);
+                var progressBar = LevelUp.GetProgressBar(exp, requiredExp);
+                
                 var message = ($"Ваш игровой персонаж:\n" +
                            $"🤵Ник: {userName}\n" +
                            $"🚀Уровень: {level}\n" +
-                           $"🌟Опыт: {exp}\n" +
+                           $"🌟Опыт: {userData.Experience}/{requiredExp}\n" +
+                           $"📊Прогресс: {progressBar}\n" +
                            $"💰Монет: {money}\n" +
                            $"💎Алмазов: {cashiers}\n" +
                            $"☠️Имя текущего босса: {bossName}\n" +

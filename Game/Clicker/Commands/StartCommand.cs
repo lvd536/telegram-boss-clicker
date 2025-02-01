@@ -21,11 +21,11 @@ public class StartCommand
             new[]
             {
                 InlineKeyboardButton.WithUrl("📱 Telegram разработчика", "https://t.me/lvdshka"),
-                InlineKeyboardButton.WithUrl("⭐️ GitHub source проекта", "https://github.com/lvd536"),
+                InlineKeyboardButton.WithUrl("⭐️ GitHub source проекта", "https://github.com/lvd536/telegram-boss-clicker"),
             }
         });
         Console.WriteLine("StartCommand Sending");
-        await botClient.SendMessage(msg.Chat.Id, "Добро пожаловать в Кликер игру!", parseMode: ParseMode.Html,
+        await botClient.SendMessage(msg.Chat.Id, "👋Добро пожаловать в Boss Clicker", parseMode: ParseMode.Html,
             replyMarkup: keyboard);
     }
 }

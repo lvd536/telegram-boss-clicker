@@ -56,4 +56,33 @@ public static class LevelUp
             }
         }
     }
+    
+    public static long GetRequiredExp(int level)
+    {
+        if (level >= 1 && level < 5)
+            return level * 100;
+        else if (level >= 5 && level < 10)
+            return level * 150;
+        else if (level >= 10 && level < 15)
+            return level * 200;
+        else if (level >= 15 && level < 20)
+            return level * 250;
+        else if (level >= 20)
+            return level * 300;
+        else
+            return level * 350;
+    }
+
+    public static string GetProgressBar(long currentExp, long requiredExp, int barLength = 10)
+    {
+        double percentage = (double)currentExp / requiredExp;
+        int filledLength = (int)(barLength * percentage);
+    
+        string progressBar = "[";
+        progressBar += new string('█', filledLength);
+        progressBar += new string('░', barLength - filledLength);
+        progressBar += $"] {(percentage * 100):F1}%";
+    
+        return progressBar;
+    }
 }

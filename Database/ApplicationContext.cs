@@ -54,7 +54,7 @@ public class ApplicationContext : DbContext
     public DbSet<Player> Users => Set<Player>();
     public ApplicationContext()
     {
-        Database.EnsureCreated();
+        Database.Migrate();
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
