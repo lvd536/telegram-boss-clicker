@@ -39,7 +39,7 @@ async Task OnMessage(Message msg, UpdateType type)
 
             case "/click":
                 await Task.Run(async () => 
-                    await clickerCall.ClickCallback(bot, msg)
+                    await clickerCall.ClickCallback(bot, msg, true)
                 );
                 break;
             
@@ -72,7 +72,7 @@ async Task OnCallbackQuery(Update update)
     {
         case "OnClick":
             await Task.Run(async () => 
-                await clickerCall.ClickCallback(bot, update.CallbackQuery.Message ?? new Message())
+                await clickerCall.ClickCallback(bot, update.CallbackQuery.Message ?? new Message(), false)
             );
             break;
         case "Profile":

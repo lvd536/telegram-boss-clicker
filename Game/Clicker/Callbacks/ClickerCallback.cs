@@ -10,36 +10,54 @@ namespace ClickerBot.Game.Clicker.Callbacks;
 
 public class ClickerCallback
 {
-    public async Task ClickCallback(ITelegramBotClient botClient, Message msg)
+    public async Task ClickCallback(ITelegramBotClient botClient, Message msg, bool command)
     {
         await using (ApplicationContext db = new ApplicationContext())
         {
             try
             {
-                var _userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
+                var userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
 
-                if (_userData is not null)
+                if (userData is not null)
                 {
-                    if (_userData.Boss == null || _userData.Boss.Health <= 0 || string.IsNullOrEmpty(_userData.Boss.Name))
+                    if (userData.Boss == null || userData.Boss.Health <= 0 || string.IsNullOrEmpty(userData.Boss.Name))
                     {
                         await Boss.Boss.BossMain(msg);
-                        _userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
+                        userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
                     }
                     
-                    _userData.Boss.Health -= Convert.ToInt32(_userData.Damage);
+                    userData.Boss.Health -= Convert.ToInt32(userData.Damage);
 
-                    if (_userData.Boss.Health <= 0)
+                    if (command)
                     {
-                        var bossExp = _userData.Boss.Experience;
-                        var bossMoney = _userData.Boss.Money;
-                        var bossCashiers = _userData.Boss.Cashiers;
-                        var bossName = _userData.Boss.Name;
+                        var message =
+                            ($"👿Текущий босс: {userData.Boss.Name}.\n" +
+                             $"🌟Уровень босса: {userData.Boss.Level}\n" +
+                             $"🩸Осталось: {userData.Boss.Health} ХП"
+                            );
+                        var keyboard = new InlineKeyboardMarkup(new[]
+                        {
+                            new[]
+                            {
+                                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
+                                InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
+                            }
+                        });
+                        await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);
+                    }
+                    
+                    if (userData.Boss.Health <= 0)
+                    {
+                        var bossExp = userData.Boss.Experience;
+                        var bossMoney = userData.Boss.Money;
+                        var bossCashiers = userData.Boss.Cashiers;
+                        var bossName = userData.Boss.Name;
 
-                        _userData.Money += bossMoney;
-                        _userData.Cashiers += bossCashiers;
-                        _userData.Experience += (long)bossExp;
+                        userData.Money += bossMoney;
+                        userData.Cashiers += bossCashiers;
+                        userData.Experience += (long)bossExp;
 
-                        _userData.Boss = new Database.Boss
+                        userData.Boss = new Database.Boss
                         {
                             Name = string.Empty,
                             Level = 0,
@@ -52,7 +70,7 @@ public class ClickerCallback
                         await db.SaveChangesAsync();
                         await LevelUp.LevelUpAsync(botClient, msg);
                         var message = (
-                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {_userData.Cashiers}💎  и {bossExp}🌟"
+                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {userData.Cashiers}💎  и {bossExp}🌟"
                         );
 
                         var keyboard = new InlineKeyboardMarkup(new[]
@@ -70,11 +88,19 @@ public class ClickerCallback
                     {
                         await db.SaveChangesAsync();
                         var message =
-                            ($"Вы нанесли боссу {_userData.Boss.Name} {_userData.Damage} урона.\n" +
-                             $"Уровень босса: {_userData.Boss.Level}\n" +
-                             $"Осталось: {_userData.Boss.Health} ХП"
+                            ($"👿Вы нанесли боссу {userData.Boss.Name} {userData.Damage} урона.\n" +
+                              $"🌟Уровень босса: {userData.Boss.Level}\n" +
+                              $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
-                        await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html);
+                        var keyboard = new InlineKeyboardMarkup(new[]
+                        {
+                            new[]
+                            {
+                                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
+                                InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
+                            }
+                        });
+                        await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
                     }
                 }
                 else
