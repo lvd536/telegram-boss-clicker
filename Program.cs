@@ -96,6 +96,15 @@ async Task OnCallbackQuery(Update update)
         case "Shop1":
             await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 1);
             break;
+        case "Shop2":
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 2);
+            break;
+        case "Shop3":
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 3);
+            break;
+        case "Shop4":
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 4);
+            break;
     }
 }
 
