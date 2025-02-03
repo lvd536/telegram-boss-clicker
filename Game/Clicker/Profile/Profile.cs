@@ -12,7 +12,9 @@ public class Profile
     {
         using (ApplicationContext db = new ApplicationContext())
         {
-            var userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
+            var userData = db.Users
+                .Include(i => i.Items)
+                .FirstOrDefault(u => u.ChatId == msg.Chat.Id);
             if (userData is not null)
             {
                 var userName = userData.Username;
@@ -22,6 +24,7 @@ public class Profile
                 var cashiers = userData.Cashiers;
                 var chatId = userData.ChatId;
                 var bossName = userData.Boss.Name;
+                var ItemsCount = userData.Items.Count;
 
                 var requiredExp = LevelUp.GetRequiredExp(level);
                 var progressBar = LevelUp.GetProgressBar(exp, requiredExp);
@@ -34,6 +37,7 @@ public class Profile
                            $"💰Монет: {money}\n" +
                            $"💎Алмазов: {cashiers}\n" +
                            $"☠️Имя текущего босса: {bossName}\n" +
+                           $"Количество предметов: {ItemsCount}\n" +
                            $"📚ChatId: {chatId}"
                 );
 
@@ -43,6 +47,10 @@ public class Profile
                     {
                         InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
                         InlineKeyboardButton.WithCallbackData("📝Установить имя", "ChangeName")
+                    },
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData("Магазин", "Shop"), 
                     }
                 });
                 try

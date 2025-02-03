@@ -93,17 +93,30 @@ async Task OnCallbackQuery(Update update)
                 await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id, "Чтобы изменить имя вам необохдимо написать: /setname Nick")
             ); 
             break;
+        case "Shop":
+            await Task.Run(async () => 
+            await shopCommand.ShopCmd(bot, update.CallbackQuery.Message ?? new Message())
+            ); 
+            break;
         case "Shop1":
-            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 1);
+            await Task.Run(async () => 
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 1)
+            ); 
             break;
         case "Shop2":
-            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 2);
+            await Task.Run(async () => 
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 2)
+            ); 
             break;
         case "Shop3":
-            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 3);
+            await Task.Run(async () => 
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 3)
+            ); 
             break;
         case "Shop4":
-            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 4);
+            await Task.Run(async () => 
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 4)
+            ); 
             break;
     }
 }
