@@ -24,7 +24,7 @@ public class Profile
                 var cashiers = userData.Cashiers;
                 var chatId = userData.ChatId;
                 var bossName = userData.Boss.Name;
-                var ItemsCount = userData.Items.Count;
+                var itemsCount = userData.Items.Count;
 
                 var requiredExp = LevelUp.GetRequiredExp(level);
                 var progressBar = LevelUp.GetProgressBar(exp, requiredExp);
@@ -37,7 +37,7 @@ public class Profile
                            $"💰Монет: {money}\n" +
                            $"💎Алмазов: {cashiers}\n" +
                            $"☠️Имя текущего босса: {bossName}\n" +
-                           $"Количество предметов: {ItemsCount}\n" +
+                           $"⚔️Количество предметов: {itemsCount}\n" +
                            $"📚ChatId: {chatId}"
                 );
 
@@ -50,7 +50,7 @@ public class Profile
                     },
                     new []
                     {
-                        InlineKeyboardButton.WithCallbackData("Магазин", "Shop"), 
+                        InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
                     }
                 });
                 try
