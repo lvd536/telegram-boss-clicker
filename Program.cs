@@ -4,6 +4,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using ClickerBot.Game.Clicker.Callbacks;
 using ClickerBot.Game.Clicker.Profile;
+using ClickerBot.Game.Clicker.Shop;
 using ClickerBot.Game.Start;
 
 using var cts = new CancellationTokenSource();
@@ -13,6 +14,7 @@ var startCommand = new StartCommand();
 var profileCommand = new Profile();
 var userNameCall = new ChangeNameCallback();
 var clickerCall = new ClickerCallback();
+var shopCommand = new Shop();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
 bot.OnError += OnError;
@@ -40,6 +42,12 @@ async Task OnMessage(Message msg, UpdateType type)
             case "/click":
                 await Task.Run(async () => 
                     await clickerCall.ClickCallback(bot, msg, true)
+                );
+                break;
+            
+            case "/shop":
+                await Task.Run(async () => 
+                    await shopCommand.ShopCmd(bot, msg)
                 );
                 break;
             
@@ -81,7 +89,12 @@ async Task OnCallbackQuery(Update update)
             );
             break;
         case "ChangeName":
-            await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id, "Чтобы изменить имя вам необохдимо написать: /setname Nick");
+            await Task.Run(async () => 
+                await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id, "Чтобы изменить имя вам необохдимо написать: /setname Nick")
+            ); 
+            break;
+        case "Shop1":
+            await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 1);
             break;
     }
 }

@@ -36,6 +36,8 @@ public class Items
     public int Count { get; set; }
     public int Damage { get; set; }
     public short Level { get; set; }
+    public int PlayerId { get; set; }
+    public Player Player { get; set; }
 }
 
 public class Boss
@@ -66,6 +68,14 @@ public class ApplicationContext : DbContext
     {
         modelBuilder.Entity<Player>()
             .OwnsOne(p => p.Boss);
+
+        modelBuilder.Entity<Player>()
+            .HasMany(p => p.Items)
+            .WithOne(i => i.Player)
+            .HasForeignKey(i => i.PlayerId);
+        
+        modelBuilder.Entity<Items>()
+            .HasIndex(i => i.PlayerId);
     }
 }
 
