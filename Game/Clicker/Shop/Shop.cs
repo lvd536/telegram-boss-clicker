@@ -58,6 +58,7 @@ public class Shop
                                 userData.Damage += item.Damage;
                                 userData.Money -= item.Price;
                                 await db.SaveChangesAsync();
+                                await botClient.SendMessage(msg.Chat.Id, $"Вы успешно купили {item.Name} за {item.Price}💰", ParseMode.Html);
                             }
                             else await botClient.SendMessage(msg.Chat.Id,
                                 $"Вам нехватает средств для покупки предмета. Необходимо: {item.Price}💰", ParseMode.Html);
