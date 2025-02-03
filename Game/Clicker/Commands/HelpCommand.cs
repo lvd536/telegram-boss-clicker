@@ -1,6 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace ClickerBot.Game.Clicker.Commands;
 
@@ -47,11 +48,26 @@ public class HelpCommand
             "• ⭐️ <a href='https://github.com/lvd536/telegram-boss-clicker'>GitHub проекта</a>\n\n" +
             
             "<i>Удачной охоты на боссов! 🎯</i>";
+        
+        var keyboard = new InlineKeyboardMarkup(new[]
+        {
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
+                InlineKeyboardButton.WithCallbackData("📝Установить имя", "ChangeName")
+            },
+            new []
+            {
+                InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
+                InlineKeyboardButton.WithCallbackData("🦸Профиль", "Profile")
+            }
+        });
 
-        await botClient.SendTextMessageAsync(
+        await botClient.SendMessage(
             chatId: msg.Chat.Id,
             text: helpMessage,
-            parseMode: ParseMode.Html
+            parseMode: ParseMode.Html,
+            replyMarkup: keyboard
         );
     }
 }
