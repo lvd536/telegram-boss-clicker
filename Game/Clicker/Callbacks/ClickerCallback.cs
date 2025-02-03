@@ -100,7 +100,16 @@ public class ClickerCallback
                                 InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
                             }
                         });
-                        await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
+                        try
+                        {
+                            await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html,
+                                replyMarkup: keyboard);
+                        }
+                        catch (Exception ex)
+                        {
+                            await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html,
+                                replyMarkup: keyboard);
+                        }
                     }
                 }
                 else

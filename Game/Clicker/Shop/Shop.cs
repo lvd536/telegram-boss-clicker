@@ -25,7 +25,14 @@ public class Shop
             }
         });
         var message = $"Магазин предметов: ";
-        await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
+        try
+        {
+            await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
+        }
+        catch (Exception ex)
+        {
+            await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);
+        }
     }
 
     public async Task ShopCallback(ITelegramBotClient botClient, Message msg, int itemId)
@@ -60,7 +67,17 @@ public class Shop
                                 userData.Damage += sItems1.Damage;
                                 userData.Money -= sItems1.Price;
                                 await db.SaveChangesAsync();
-                                await botClient.EditMessageText(msg.Chat.Id, msg.Id,$"Вы успешно купили {sItems1.Name} за {sItems1.Price}💰", ParseMode.Html);
+                                try
+                                {
+                                    await botClient.EditMessageText(msg.Chat.Id, msg.Id,
+                                        $"Вы успешно купили {sItems1.Name} за {sItems1.Price}💰", ParseMode.Html);
+                                }
+                                catch (Exception ex)
+                                {
+                                    await botClient.SendMessage(msg.Chat.Id,
+                                        $"Вы успешно купили {sItems1.Name} за {sItems1.Price}💰", ParseMode.Html);
+                                }
+                                
                             }
                             else
                                 await botClient.SendMessage(msg.Chat.Id,
@@ -89,7 +106,16 @@ public class Shop
                                 userData.Damage += sItems2.Damage;
                                 userData.Money -= sItems2.Price;
                                 await db.SaveChangesAsync();
-                                await botClient.EditMessageText(msg.Chat.Id, msg.Id,$"Вы успешно купили {sItems2.Name} за {sItems2.Price}💰", ParseMode.Html);
+                                try
+                                {
+                                    await botClient.EditMessageText(msg.Chat.Id, msg.Id,
+                                        $"Вы успешно купили {sItems2.Name} за {sItems2.Price}💰", ParseMode.Html);
+                                }
+                                catch (Exception ex)
+                                {
+                                    await botClient.SendMessage(msg.Chat.Id,
+                                        $"Вы успешно купили {sItems2.Name} за {sItems2.Price}💰", ParseMode.Html);
+                                }
                             }
                             else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {sItems2.Price}💰", ParseMode.Html);
                         }
@@ -115,7 +141,16 @@ public class Shop
                                 userData.Damage += sItems3.Damage;
                                 userData.Money -= sItems3.Price;
                                 await db.SaveChangesAsync();
-                                await botClient.EditMessageText(msg.Chat.Id, msg.Id,$"Вы успешно купили {sItems3.Name} за {sItems3.Price}💰", ParseMode.Html);
+                                try
+                                {
+                                    await botClient.EditMessageText(msg.Chat.Id, msg.Id,
+                                        $"Вы успешно купили {sItems3.Name} за {sItems3.Price}💰", ParseMode.Html);
+                                }
+                                catch (Exception ex)
+                                {
+                                    await botClient.SendMessage(msg.Chat.Id,
+                                        $"Вы успешно купили {sItems3.Name} за {sItems3.Price}💰", ParseMode.Html);
+                                }
                             }
                             else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {sItems3.Price}💰", ParseMode.Html);
                         }
@@ -141,7 +176,16 @@ public class Shop
                                 userData.Damage += sItems4.Damage;
                                 userData.Money -= sItems4.Price;
                                 await db.SaveChangesAsync();
-                                await botClient.EditMessageText(msg.Chat.Id, msg.Id,$"Вы успешно купили {sItems4.Name} за {sItems4.Price}💰", ParseMode.Html);
+                                try
+                                {
+                                    await botClient.EditMessageText(msg.Chat.Id, msg.Id,
+                                        $"Вы успешно купили {sItems4.Name} за {sItems4.Price}💰", ParseMode.Html);
+                                }
+                                catch (Exception ex)
+                                {
+                                    await botClient.SendMessage(msg.Chat.Id,
+                                        $"Вы успешно купили {sItems4.Name} за {sItems4.Price}💰", ParseMode.Html);
+                                }
                             }
                             else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {sItems4.Price}💰", ParseMode.Html);
                         }
