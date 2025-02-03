@@ -3,6 +3,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using ClickerBot.Game.Clicker.Callbacks;
+using ClickerBot.Game.Clicker.Commands;
 using ClickerBot.Game.Clicker.Profile;
 using ClickerBot.Game.Clicker.Shop;
 using ClickerBot.Game.Start;
@@ -15,6 +16,7 @@ var profileCommand = new Profile();
 var userNameCall = new ChangeNameCallback();
 var clickerCall = new ClickerCallback();
 var shopCommand = new Shop();
+var helpCommand = new HelpCommand();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
 bot.OnError += OnError;
@@ -66,6 +68,11 @@ async Task OnMessage(Message msg, UpdateType type)
             case "/profile":
                 await Task.Run(async () => 
                     await profileCommand.ProfileCmdAsync(bot, msg)
+                );
+                break;
+            case "/help":
+                await Task.Run(async () => 
+                    await helpCommand.HelpCommandHandler(bot, msg)
                 );
                 break;
         }
