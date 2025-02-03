@@ -25,7 +25,7 @@ public class StartCommand
             }
         });
         Console.WriteLine("StartCommand Sending");
-        await botClient.SendMessage(msg.Chat.Id, "👋Добро пожаловать в Boss Clicker", parseMode: ParseMode.Html,
+        await botClient.SendMessage(msg.Chat.Id, "👋Добро пожаловать в Boss Clicker. Для более подробной информации напишите /help", parseMode: ParseMode.Html,
             replyMarkup: keyboard);
     }
 }
