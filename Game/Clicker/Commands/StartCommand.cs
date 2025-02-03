@@ -16,7 +16,7 @@ public class StartCommand
         {
             new[]
             {
-                InlineKeyboardButton.WithCallbackData("Клик!", "OnClick"),
+                InlineKeyboardButton.WithCallbackData("⚔️Клик!", "OnClick"),
             },
             new[]
             {

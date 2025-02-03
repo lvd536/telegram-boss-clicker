@@ -15,16 +15,16 @@ public class Shop
         {
             new[]
             {
-                InlineKeyboardButton.WithCallbackData("Молот Гнева Босса", "Shop1"),
-                InlineKeyboardButton.WithCallbackData("Кинжал Скрытого Тапа", "Shop2")
+                InlineKeyboardButton.WithCallbackData("🔨Молот Гнева Босса", "Shop1"),
+                InlineKeyboardButton.WithCallbackData("🗡️Кинжал Скрытого Тапа", "Shop2")
             },
             new[]
             {
-                InlineKeyboardButton.WithCallbackData("Доспехи Непробиваемого Терпения", "Shop3"),
-                InlineKeyboardButton.WithCallbackData("Плащ Невидимого Фарма", "Shop4")
+                InlineKeyboardButton.WithCallbackData("🛡️Доспехи Непробиваемого Терпения", "Shop3"),
+                InlineKeyboardButton.WithCallbackData("⛓️‍Плащ Невидимого Фарма", "Shop4")
             }
         });
-        var message = $"Магазин предметов: ";
+        var message = $"🛍️Магазин предметов: ";
         try
         {
             await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);

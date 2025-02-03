@@ -46,7 +46,7 @@ public static class LevelUp
                     userData.Level++;
                     userData.Experience = 0;
                     await db.SaveChangesAsync();
-                    await botClient.SendMessage(msg.Chat.Id, $"Поздравляем! Вы повысили свой уровень до {userData.Level}", ParseMode.Html);
+                    await botClient.SendMessage(msg.Chat.Id, $"🎉Поздравляем! Вы повысили свой уровень до {userData.Level}", ParseMode.Html);
                 }
             }
             else
