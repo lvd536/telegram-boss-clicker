@@ -15,6 +15,8 @@ public class Player
     public long Money { get; set; }
     public long Cashiers { get; set; }
     public long Damage { get; set; }
+    
+    public int KilledBosses { get; set; }
     public Boss Boss { get; set; } = new Boss
     {
         Name = "",

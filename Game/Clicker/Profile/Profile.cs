@@ -25,6 +25,7 @@ public class Profile
                 var chatId = userData.ChatId;
                 var bossName = userData.Boss.Name;
                 var itemsCount = userData.Items.Count;
+                var killsCount = userData.KilledBosses;
 
                 var requiredExp = LevelUp.GetRequiredExp(level);
                 var progressBar = LevelUp.GetProgressBar(exp, requiredExp);
@@ -38,6 +39,7 @@ public class Profile
                            $"💎Алмазов: {cashiers}\n" +
                            $"☠️Имя текущего босса: {bossName}\n" +
                            $"⚔️Количество предметов: {itemsCount}\n" +
+                           $"Кол-во убитых боссов: {killsCount}\n" +
                            $"📚ChatId: {chatId}"
                 );
 

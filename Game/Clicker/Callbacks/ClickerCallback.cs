@@ -56,6 +56,7 @@ public class ClickerCallback
                         userData.Money += bossMoney;
                         userData.Cashiers += bossCashiers;
                         userData.Experience += (long)bossExp;
+                        userData.KilledBosses++;
 
                         userData.Boss = new Database.Boss
                         {
@@ -83,6 +84,7 @@ public class ClickerCallback
                         });
                         
                         await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);
+                        await Boss.Boss.BossMain(msg);
                     }
                     else
                     {
