@@ -12,7 +12,7 @@ public class TopCommand
         using (ApplicationContext db = new ApplicationContext())
         {
             var users = db.Users.ToList();
-            string message = $"Топ игроков по уровню: ";
+            string message = $"🔝Топ игроков по уровню: ";
             int index = 1;
             users.Sort((a, b) => b.Level - a.Level);
             foreach (var u in users)
