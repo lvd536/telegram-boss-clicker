@@ -10,7 +10,6 @@ using Database;
 public class DailyReward
 {
     private Random _rnd = new Random();
-    private DateTime _date = DateTime.Now;
     public async Task DailyRewardCmd(TelegramBotClient botClient, Message msg)
     {
         using (ApplicationContext db = new ApplicationContext())
