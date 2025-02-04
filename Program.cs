@@ -84,7 +84,7 @@ async Task OnMessage(Message msg, UpdateType type)
                 break;
             case "/top":
                 await Task.Run(async () => 
-                    await topCommand.TopCmd(bot, msg)
+                    await topCommand.TopCmd(bot, msg, 1)
                 );
                 break;
         }
@@ -142,6 +142,32 @@ async Task OnCallbackQuery(Update update)
                 await dailyCommand.DailyRewardCmd(bot, update.CallbackQuery.Message ?? new Message())
             );
             break;
+        case "Top":
+            await Task.Run(async () =>
+                await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 1)
+            );
+            break;
+        case "TopByMoney":
+            await Task.Run(async () =>
+                await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 2)
+            );
+            break;
+        case "TopByCashiers":
+            await Task.Run(async () =>
+                await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 3)
+            );
+            break;
+        case "TopByKills":
+            await Task.Run(async () =>
+                await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 4)
+            );
+            break;
+        case "TopByDamage":
+            await Task.Run(async () =>
+                await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 5)
+            );
+            break;
+            
     }
 }
 

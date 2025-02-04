@@ -7,27 +7,102 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 public class TopCommand
 {
-    public async Task TopCmd(ITelegramBotClient botClient, Message msg)
+    public async Task TopCmd(ITelegramBotClient botClient, Message msg, int type)
     {
         using (ApplicationContext db = new ApplicationContext())
         {
             var users = db.Users.ToList();
-            string message = $"🔝Топ игроков по уровню: ";
+            string message = string.Empty;
             int index = 1;
-            users.Sort((a, b) => b.Level - a.Level);
-            foreach (var u in users)
+            switch (type)
             {
-                if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Level}";
-                else message += $"\n{index}. {u.Username} - {u.Level}";
-                index++;
+                case 1: // Level
+                    index = 1;
+                    message = $"🔝Топ игроков по уровню: ";
+                    users.Sort((a, b) => b.Level - a.Level);
+                    foreach (var u in users)
+                    {
+                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Level}";
+                        else message += $"\n{index}. {u.Username} - {u.Level}";
+                        index++;
+                    }
+                    break;
+                case 2: // Money
+                    index = 1;
+                    message = $"🔝Топ игроков по монетам: ";
+                    users.Sort((a, b) => Convert.ToInt32(b.Money - a.Money));
+                    foreach (var u in users)
+                    {
+                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Money}";
+                        else message += $"\n{index}. {u.Username} - {u.Money}";
+                        index++;
+                    }
+                    break;
+                case 3: // Cashiers
+                    index = 1;
+                    message = $"🔝Топ игроков по алмазам: ";
+                    users.Sort((a, b) => Convert.ToInt32(b.Cashiers - a.Cashiers));
+                    foreach (var u in users)
+                    {
+                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Cashiers}";
+                        else message += $"\n{index}. {u.Username} - {u.Cashiers}";
+                        index++;
+                    }
+                    break;
+                case 4: // Kills
+                    index = 1;
+                    message = $"🔝Топ игроков по убийствам: ";
+                    users.Sort((a, b) => b.KilledBosses - a.KilledBosses);
+                    foreach (var u in users)
+                    {
+                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.KilledBosses}";
+                        else message += $"\n{index}. {u.Username} - {u.KilledBosses}";
+                        index++;
+                    }
+                    break;
+                case 5: // Damage
+                    index = 1;
+                    message = $"🔝Топ игроков по урону: ";
+                    users.Sort((a, b) => Convert.ToInt32(b.Damage - a.Damage));
+                    foreach (var u in users)
+                    {
+                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Damage}";
+                        else message += $"\n{index}. {u.Username} - {u.Damage}";
+                        index++;
+                    }
+                    break;
             }
-
+            
+            var keyboard = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData("Топ по уровню", "Top"),
+                },
+                new []
+                {
+                    InlineKeyboardButton.WithCallbackData("Топ по монетам", "TopByMoney")
+                },
+                new []
+                {
+                    InlineKeyboardButton.WithCallbackData("Топ по алмазам", "TopByCashiers"), 
+                },
+                new []
+                {
+                    InlineKeyboardButton.WithCallbackData("Топ по убитым боссам", "TopByKills")
+                },
+                new []
+                {
+                    InlineKeyboardButton.WithCallbackData("Топ по урону", "TopByDamage"), 
+                }
+            });
+            
             try
             {
-                await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html);
+                await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
             } catch (Exception ex)
             {
-                await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html);
+                await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);
             }
         }
     }

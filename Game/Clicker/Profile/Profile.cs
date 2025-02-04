@@ -55,6 +55,10 @@ public class Profile
                     {
                         InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
                         InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily")
+                    },
+                    new []
+                    {
+                        InlineKeyboardButton.WithCallbackData("📶Топ", "Top"), 
                     }
                 });
                 try

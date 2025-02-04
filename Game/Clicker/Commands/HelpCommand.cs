@@ -64,7 +64,8 @@ public class HelpCommand
             ,
             new []
             {
-                InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily")
+                InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily"),
+                InlineKeyboardButton.WithCallbackData("📶Топ", "Top")
             }
         });
 
