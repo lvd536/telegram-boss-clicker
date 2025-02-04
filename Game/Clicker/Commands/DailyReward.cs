@@ -31,11 +31,11 @@ public class DailyReward
                 userData.Cashiers += userCashierReward;
                 userData.DailyGetTime = usertime;
                 await db.SaveChangesAsync();
-                await botClient.SendMessage(msg.Chat.Id, $"Вы получили {userMoneyReward} и {userCashierReward}!", ParseMode.Html);
+                await botClient.SendMessage(msg.Chat.Id, $"🚀 Вы получили {userMoneyReward}💰 и {userCashierReward}💎!", ParseMode.Html);
             }
             else
             {
-                await botClient.SendMessage(msg.Chat.Id, $"Подождите 24 часа с момента получения последней ежедневной награды чтобы получить ее снова", ParseMode.Html);
+                await botClient.SendMessage(msg.Chat.Id, $"⚠️ Подождите 24 часа с момента получения последней ежедневной награды чтобы получить ее снова", ParseMode.Html);
             }
         }
     }

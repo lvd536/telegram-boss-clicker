@@ -131,6 +131,11 @@ async Task OnCallbackQuery(Update update)
             await shopCommand.ShopCallback(bot, update.CallbackQuery.Message ?? new Message(), 4)
             ); 
             break;
+        case "Daily":
+            await Task.Run(async () =>
+                await dailyCommand.DailyRewardCmd(bot, update.CallbackQuery.Message ?? new Message())
+            );
+            break;
     }
 }
 

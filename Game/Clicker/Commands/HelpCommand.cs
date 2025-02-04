@@ -61,6 +61,11 @@ public class HelpCommand
                 InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
                 InlineKeyboardButton.WithCallbackData("🦸Профиль", "Profile")
             }
+            ,
+            new []
+            {
+                InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily")
+            }
         });
 
         await botClient.SendMessage(
