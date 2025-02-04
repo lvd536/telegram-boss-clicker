@@ -18,6 +18,7 @@ public class Profile
             if (userData is not null)
             {
                 var userName = userData.Username;
+                if (String.IsNullOrEmpty(userName)) userName = "Не установлен.";
                 var level = userData.Level;
                 var exp = userData.Experience;
                 var money = userData.Money;
