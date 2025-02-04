@@ -17,6 +17,7 @@ var userNameCall = new ChangeNameCallback();
 var clickerCall = new ClickerCallback();
 var shopCommand = new Shop();
 var helpCommand = new HelpCommand();
+var dailyCommand = new DailyReward();
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnCallbackQuery;
 bot.OnError += OnError;
@@ -73,6 +74,11 @@ async Task OnMessage(Message msg, UpdateType type)
             case "/help":
                 await Task.Run(async () => 
                     await helpCommand.HelpCommandHandler(bot, msg)
+                );
+                break;
+            case "/daily":
+                await Task.Run(async () =>
+                    await dailyCommand.DailyRewardCmd(bot, msg)
                 );
                 break;
         }
