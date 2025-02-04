@@ -7,7 +7,7 @@ namespace ClickerBot.Game.Clicker.Commands;
 
 public class HelpCommand
 {
-    public async Task HelpCommandHandler(ITelegramBotClient botClient, Message msg)
+    public async Task HelpCmd(ITelegramBotClient botClient, Message msg)
     {
         var helpMessage = 
             "<b>🎮 Boss Clicker - Справочник игрока</b>\n\n" +

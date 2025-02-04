@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.Diagnostics.Metrics;
-
-namespace ClickerBot.Game.Clicker.Commands;
+﻿namespace ClickerBot.Game.Clicker.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 using Database;
 
-public class DailyReward
+public class DailyRewardCommand
 {
     private Random _rnd = new Random();
     public async Task DailyRewardCmd(TelegramBotClient botClient, Message msg)
