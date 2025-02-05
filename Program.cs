@@ -193,6 +193,11 @@ async Task OnCallbackQuery(Update update)
                 await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 5)
             );
             break;
+        case "TopByElo":
+            await Task.Run(async () =>
+                await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 6)
+            );
+            break;
     }
 }
 

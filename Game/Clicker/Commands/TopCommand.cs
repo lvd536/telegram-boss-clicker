@@ -71,6 +71,18 @@ public class TopCommand
                         index++;
                     }
                     break;
+                case 6: // ELO
+                    index = 1;
+                    message = $"🔝Топ игроков по ELO: ";
+                    users.Sort((a, b) => Convert.ToInt32(b.Elo - a.Elo));
+                    foreach (var u in users)
+                    {
+                        //if (index >= 50) break;
+                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Elo}";
+                        else message += $"\n{index}. {u.Username} - {u.Elo}";
+                        index++;
+                    }
+                    break;
             }
             
             var keyboard = new InlineKeyboardMarkup(new[]
@@ -94,6 +106,10 @@ public class TopCommand
                 new []
                 {
                     InlineKeyboardButton.WithCallbackData("🩸Топ по урону", "TopByDamage"), 
+                },
+                new []
+                {
+                    InlineKeyboardButton.WithCallbackData("📊Топ по ELO", "TopByElo"), 
                 }
             });
             
