@@ -1,12 +1,11 @@
-﻿using ClickerBot.Database;
-using ClickerBot.Game.Clicker.Profile;
+﻿namespace ClickerBot.Game.Clicker.Callbacks;
+using ClickerBot.Database;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-
-namespace ClickerBot.Game.Clicker.Callbacks;
+using Handlers;
 
 public class ClickerCallback
 {
@@ -22,7 +21,7 @@ public class ClickerCallback
                 {
                     if (userData.Boss == null || userData.Boss.Health <= 0 || string.IsNullOrEmpty(userData.Boss.Name))
                     {
-                        await Boss.Boss.BossMain(msg);
+                        await Clicker.Boss.Boss.BossMain(msg);
                         userData = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
                     }
                     
@@ -59,10 +58,16 @@ public class ClickerCallback
                         var bossMoney = userData.Boss.Money;
                         var bossCashiers = userData.Boss.Cashiers;
                         var bossName = userData.Boss.Name;
-
+                        string userRank = userData.Rank;
+                        int userElo = 0;
+                        if (userData.Level <= 50) userRank = RankSystemHandler.GetRank(userData.Level);
+                        else userElo = RankSystemHandler.GetElo((int)userData.Damage);
+                        string result = (userData.Level <= 50 ? bossExp : userElo.ToString()) + " " + (userData.Level <= 50 ? "🌟" : "ELO");
                         userData.Money += bossMoney;
                         userData.Cashiers += bossCashiers;
                         userData.Experience += (long)bossExp;
+                        userData.Rank = userRank;
+                        userData.Elo = userElo;
                         userData.KilledBosses++;
 
                         userData.Boss = new Database.Boss
@@ -78,7 +83,7 @@ public class ClickerCallback
                         await db.SaveChangesAsync();
                         await LevelUp.LevelUpAsync(botClient, msg);
                         var message = (
-                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {userData.Cashiers}💎  и {bossExp}🌟"
+                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {userData.Cashiers}💎  и {result}"
                         );
 
                         var keyboard = new InlineKeyboardMarkup(new[]
@@ -98,7 +103,7 @@ public class ClickerCallback
                         {
                             await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html, replyMarkup: keyboard);   
                         }
-                        await Boss.Boss.BossMain(msg);
+                        await Clicker.Boss.Boss.BossMain(msg);
                     }
                     else
                     {

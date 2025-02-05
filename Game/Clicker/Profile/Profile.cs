@@ -5,6 +5,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Database;
 using Microsoft.EntityFrameworkCore;
+using Handlers;
 
 public class Profile
 {
@@ -27,12 +28,16 @@ public class Profile
                 var bossName = userData.Boss.Name;
                 var itemsCount = userData.Items.Count;
                 var killsCount = userData.KilledBosses;
+                var rank = userData.Rank;
+                var eloCount = userData.Elo;
 
                 var requiredExp = LevelUp.GetRequiredExp(level);
                 var progressBar = LevelUp.GetProgressBar(exp, requiredExp);
                 
                 var message = ($"Ваш игровой персонаж:\n" +
                            $"🤵Ник: {userName}\n" +
+                           $"👑Ранг: {rank}\n" +
+                           $"📊Elo: {eloCount}\n" +
                            $"🚀Уровень: {level}\n" +
                            $"🌟Опыт: {userData.Experience}/{requiredExp}\n" +
                            $"📊Прогресс: {progressBar}\n" +

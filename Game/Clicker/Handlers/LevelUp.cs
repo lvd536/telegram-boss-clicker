@@ -1,4 +1,4 @@
-﻿namespace ClickerBot.Game.Clicker.Profile;
+﻿namespace ClickerBot.Game.Clicker.Handlers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
