@@ -58,7 +58,7 @@ public static class Boss
                     };
                 
                     await db.SaveChangesAsync();
-                    Console.WriteLine($"Boss created: {bossName}, HP: {bossHealth}");
+                    Console.WriteLine($"Boss created: {bossName}, HP: {bossHealth} | ChatID: {msg.Chat.Id}");
                 }
             }
             catch (Exception ex)
