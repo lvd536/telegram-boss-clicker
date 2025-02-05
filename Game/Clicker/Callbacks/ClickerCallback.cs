@@ -1,5 +1,5 @@
 ﻿namespace ClickerBot.Game.Clicker.Callbacks;
-using ClickerBot.Database;
+using Database;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
