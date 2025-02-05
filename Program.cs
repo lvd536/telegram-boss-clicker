@@ -95,6 +95,18 @@ async Task OnMessage(Message msg, UpdateType type)
                     await itemsCommand.ItemList(bot, msg)
                 );
                 break;
+            case "/upgrade":
+                if (argument is not null)
+                {
+                    try
+                    {
+                        await itemsCommand.ItemUpgrade(bot, msg, Convert.ToInt32(argument));
+                    } catch (FormatException)
+                    {
+                        await bot.SendMessage(msg.Chat.Id, "Неверно указан ID предмета. Пример: /upgrade 1", ParseMode.Html);
+                    }
+                }
+                break;
         }
     }
 
