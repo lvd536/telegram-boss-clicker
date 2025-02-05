@@ -77,23 +77,23 @@ public class TopCommand
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData("Топ по уровню", "Top"),
+                    InlineKeyboardButton.WithCallbackData("🌟Топ по уровню", "Top"),
                 },
                 new []
                 {
-                    InlineKeyboardButton.WithCallbackData("Топ по монетам", "TopByMoney")
+                    InlineKeyboardButton.WithCallbackData("💰Топ по монетам", "TopByMoney")
                 },
                 new []
                 {
-                    InlineKeyboardButton.WithCallbackData("Топ по алмазам", "TopByCashiers"), 
+                    InlineKeyboardButton.WithCallbackData("💎Топ по алмазам", "TopByCashiers"), 
                 },
                 new []
                 {
-                    InlineKeyboardButton.WithCallbackData("Топ по убитым боссам", "TopByKills")
+                    InlineKeyboardButton.WithCallbackData("👿Топ по убитым боссам", "TopByKills")
                 },
                 new []
                 {
-                    InlineKeyboardButton.WithCallbackData("Топ по урону", "TopByDamage"), 
+                    InlineKeyboardButton.WithCallbackData("🩸Топ по урону", "TopByDamage"), 
                 }
             });
             

@@ -17,7 +17,7 @@ public class ChangeNameCallback
             {
                 if (newName.Length > 15)
                 {
-                    await botClient.SendMessage(msg.Chat.Id, "Максимально допустимая длина имени - 15 символов.", ParseMode.Html);
+                    await botClient.SendMessage(msg.Chat.Id, "⚠️Максимально допустимая длина имени - 15 символов.", ParseMode.Html);
                 }
                 else
                 {
@@ -27,7 +27,7 @@ public class ChangeNameCallback
                     {
                         InlineKeyboardButton.WithCallbackData("🦸Профиль", "Profile")
                     });
-                    await botClient.SendMessage(msg.Chat.Id, $"Ваше имя изменено на {userData.Username}",
+                    await botClient.SendMessage(msg.Chat.Id, $"👏Ваше имя изменено на {userData.Username}",
                         ParseMode.Html, replyMarkup: keyboard);
                 }
             }
