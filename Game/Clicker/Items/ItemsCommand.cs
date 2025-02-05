@@ -20,7 +20,7 @@ public class ItemsCommand
                 foreach (var item in userData.Items)
                 {
                     message +=
-                        $"<blockquote> {item.Id}. Название: {item.Name}, Уровень: {item.Level}, Урон: {item.Damage}, Цена: {item.Price} </blockquote>";
+                        $"<blockquote> ID: {item.Id}\n Название: {item.Name}\n Уровень: {item.Level}\n Урон: {item.Damage}\n Цена: {item.Price}\n Стоимость улучшения: {item.Price * 2} </blockquote>";
                 }
 
                 await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html);
