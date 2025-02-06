@@ -116,9 +116,21 @@ async Task OnMessage(Message msg, UpdateType type)
                 {
                     try
                     {
-                        await Task.Run(async () =>
-                            await itemsCommand.ItemCraft(bot, msg, Convert.ToInt32(argument), Convert.ToInt32(defArgument))
-                        );
+                        if (int.Parse(argument) >= 100 && int.Parse(defArgument) >= 10)
+                        {
+                            await Task.Run(async () =>
+                                await itemsCommand.ItemCraft(bot, msg, int.Parse(argument),
+                                    int.Parse(defArgument))
+                            );
+                        }
+                        else
+                        {
+                            await Task.Run(async () =>
+                                await bot.SendMessage(msg.Chat.Id,
+                                    "Вы указали нулевое значение для крафта. Минимальные значения: 100 монет и 10 кристалов",
+                                    ParseMode.Html)
+                            );
+                        }
                     } catch (FormatException)
                     {
                         await Task.Run(async () =>
