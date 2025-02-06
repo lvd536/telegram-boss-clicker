@@ -106,7 +106,7 @@ public class ItemsCommand
             if (userData is null)
             {
                 await DBMethods.CreatePlayerAsync(msg);
-                await botClient.SendMessage(msg.Chat.Id, "Вы не зарегистрированы. Пожалуйста, попробуйте снова.");
+                await botClient.SendMessage(msg.Chat.Id, "Вы не зарегистрированы, регистрируем вас. Пожалуйста, попробуйте снова.");
                 return;
             }
 
