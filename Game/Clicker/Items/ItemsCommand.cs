@@ -9,6 +9,38 @@ using Handlers;
 
 public class ItemsCommand
 {
+    public static readonly Items sItems1 = new Items
+    {
+        Name = "Молот Гнева Босса",
+        Price = 350,
+        Count = 1,
+        Damage = 5,
+        Level = 1
+    };
+    public static readonly Items sItems2 = new Items
+    {
+        Name = "Кинжал Скрытого Тапа",
+        Price = 700,
+        Count = 1,
+        Damage = 10,
+        Level = 1
+    };
+    public static readonly Items sItems3 = new Items
+    {
+        Name = "Доспехи Непробиваемого Терпения",
+        Price = 1400,
+        Count = 1,
+        Damage = 15,
+        Level = 1
+    };
+    public static readonly Items sItems4 = new Items
+    {
+        Name = "Доспехи Потерянной Легенды",
+        Price = 4000,
+        Count = 1,
+        Damage = 20,
+        Level = 1
+    };
     public async Task ItemList(ITelegramBotClient botClient, Message msg)
     {
         using (ApplicationContext db = new ApplicationContext())

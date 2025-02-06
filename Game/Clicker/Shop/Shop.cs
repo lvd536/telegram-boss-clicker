@@ -1,4 +1,6 @@
-﻿namespace ClickerBot.Game.Clicker.Shop;
+﻿using ClickerBot.Game.Clicker.Items;
+
+namespace ClickerBot.Game.Clicker.Shop;
 
 using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot;
@@ -21,7 +23,7 @@ public class Shop
             new[]
             {
                 InlineKeyboardButton.WithCallbackData("🛡️Доспехи Непробиваемого Терпения", "Shop3"),
-                InlineKeyboardButton.WithCallbackData("⛓️‍Плащ Невидимого Фарма", "Shop4")
+                InlineKeyboardButton.WithCallbackData("⛓️‍Доспехи Потерянной Легенды", "Shop4")
             }
         });
         var message = $"🛍️Магазин предметов: ";
@@ -47,147 +49,123 @@ public class Shop
                 switch (itemId)
                 {
                     case 1:
-                        Items sItems1 = new Items
+                        /*Items ItemsCommand.sItems1 = new Items
                         {
                             Name = "Молот Гнева Босса",
                             Price = 350,
                             Count = 1,
                             Damage = 5,
                             Level = 1
-                        };
-                        if (userData.Items.Any(i => i.Name == sItems1.Name))
+                        };*/
+                        if (userData.Items.Any(i => i.Name == ItemsCommand.sItems1.Name))
                         {
-                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {sItems1.Name}!", ParseMode.Html);
+                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {ItemsCommand.sItems1.Name}!", ParseMode.Html);
                         }
                         else
                         {
-                            if (userData.Money >= sItems1.Price)
+                            if (userData.Money >= ItemsCommand.sItems1.Price)
                             {
-                                userData.Items.Add(sItems1);
-                                userData.Damage += sItems1.Damage;
-                                userData.Money -= sItems1.Price;
+                                userData.Items.Add(ItemsCommand.sItems1);
+                                userData.Damage += ItemsCommand.sItems1.Damage;
+                                userData.Money -= ItemsCommand.sItems1.Price;
                                 await db.SaveChangesAsync();
                                 try
                                 {
                                     await botClient.EditMessageText(msg.Chat.Id, msg.Id,
-                                        $"Вы успешно купили {sItems1.Name} за {sItems1.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems1.Name} за {ItemsCommand.sItems1.Price}💰", ParseMode.Html);
                                 }
                                 catch (Exception ex)
                                 {
                                     await botClient.SendMessage(msg.Chat.Id,
-                                        $"Вы успешно купили {sItems1.Name} за {sItems1.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems1.Name} за {ItemsCommand.sItems1.Price}💰", ParseMode.Html);
                                 }
                                 
                             }
                             else
                                 await botClient.SendMessage(msg.Chat.Id,
-                                    $"Вам нехватает средств для покупки предмета. Необходимо: {sItems1.Price}💰",ParseMode.Html);
+                                    $"Вам нехватает средств для покупки предмета. Необходимо: {ItemsCommand.sItems1.Price}💰",ParseMode.Html);
                         }
 
                         break;
                     case 2:
-                        Items sItems2 = new Items
+                        if (userData.Items.Any(i => i.Name == ItemsCommand.sItems2.Name))
                         {
-                            Name = "Кинжал Скрытого Тапа",
-                            Price = 700,
-                            Count = 1,
-                            Damage = 10,
-                            Level = 1
-                        };
-                        if (userData.Items.Any(i => i.Name == sItems2.Name))
-                        {
-                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {sItems2.Name}!", ParseMode.Html);
+                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {ItemsCommand.sItems2.Name}!", ParseMode.Html);
                         }
                         else
                         {
-                            if (userData.Money >= sItems2.Price)
+                            if (userData.Money >= ItemsCommand.sItems2.Price)
                             {
-                                userData.Items.Add(sItems2);
-                                userData.Damage += sItems2.Damage;
-                                userData.Money -= sItems2.Price;
+                                userData.Items.Add(ItemsCommand.sItems2);
+                                userData.Damage += ItemsCommand.sItems2.Damage;
+                                userData.Money -= ItemsCommand.sItems2.Price;
                                 await db.SaveChangesAsync();
                                 try
                                 {
                                     await botClient.EditMessageText(msg.Chat.Id, msg.Id,
-                                        $"Вы успешно купили {sItems2.Name} за {sItems2.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems2.Name} за {ItemsCommand.sItems2.Price}💰", ParseMode.Html);
                                 }
                                 catch (Exception ex)
                                 {
                                     await botClient.SendMessage(msg.Chat.Id,
-                                        $"Вы успешно купили {sItems2.Name} за {sItems2.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems2.Name} за {ItemsCommand.sItems2.Price}💰", ParseMode.Html);
                                 }
                             }
-                            else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {sItems2.Price}💰", ParseMode.Html);
+                            else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {ItemsCommand.sItems2.Price}💰", ParseMode.Html);
                         }
                         break;
                     case 3:
-                        Items sItems3 = new Items
+                        if (userData.Items.Any(i => i.Name == ItemsCommand.sItems3.Name))
                         {
-                            Name = "Доспехи Непробиваемого Терпения",
-                            Price = 1400,
-                            Count = 1,
-                            Damage = 15,
-                            Level = 1
-                        };
-                        if (userData.Items.Any(i => i.Name == sItems3.Name))
-                        {
-                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {sItems3.Name}!", ParseMode.Html);
+                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {ItemsCommand.sItems3.Name}!", ParseMode.Html);
                         }
                         else
                         {
-                            if (userData.Money >= sItems3.Price)
+                            if (userData.Money >= ItemsCommand.sItems3.Price)
                             {
-                                userData.Items.Add(sItems3);
-                                userData.Damage += sItems3.Damage;
-                                userData.Money -= sItems3.Price;
+                                userData.Items.Add(ItemsCommand.sItems3);
+                                userData.Damage += ItemsCommand.sItems3.Damage;
+                                userData.Money -= ItemsCommand.sItems3.Price;
                                 await db.SaveChangesAsync();
                                 try
                                 {
                                     await botClient.EditMessageText(msg.Chat.Id, msg.Id,
-                                        $"Вы успешно купили {sItems3.Name} за {sItems3.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems3.Name} за {ItemsCommand.sItems3.Price}💰", ParseMode.Html);
                                 }
                                 catch (Exception ex)
                                 {
                                     await botClient.SendMessage(msg.Chat.Id,
-                                        $"Вы успешно купили {sItems3.Name} за {sItems3.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems3.Name} за {ItemsCommand.sItems3.Price}💰", ParseMode.Html);
                                 }
                             }
-                            else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {sItems3.Price}💰", ParseMode.Html);
+                            else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {ItemsCommand.sItems3.Price}💰", ParseMode.Html);
                         }
                         break;
                     case 4:
-                        Items sItems4 = new Items
+                        if (userData.Items.Any(i => i.Name == ItemsCommand.sItems4.Name))
                         {
-                            Name = "Доспехи Непробиваемого Терпения",
-                            Price = 4000,
-                            Count = 1,
-                            Damage = 20,
-                            Level = 1
-                        };
-                        if (userData.Items.Any(i => i.Name == sItems4.Name))
-                        {
-                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {sItems4.Name}!", ParseMode.Html);
+                            await botClient.SendMessage(msg.Chat.Id, $"У вас уже есть {ItemsCommand.sItems4.Name}!", ParseMode.Html);
                         }
                         else
                         {
-                            if (userData.Money >= sItems4.Price)
+                            if (userData.Money >= ItemsCommand.sItems4.Price)
                             {
-                                userData.Items.Add(sItems4);
-                                userData.Damage += sItems4.Damage;
-                                userData.Money -= sItems4.Price;
+                                userData.Items.Add(ItemsCommand.sItems4);
+                                userData.Damage += ItemsCommand.sItems4.Damage;
+                                userData.Money -= ItemsCommand.sItems4.Price;
                                 await db.SaveChangesAsync();
                                 try
                                 {
                                     await botClient.EditMessageText(msg.Chat.Id, msg.Id,
-                                        $"Вы успешно купили {sItems4.Name} за {sItems4.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems4.Name} за {ItemsCommand.sItems4.Price}💰", ParseMode.Html);
                                 }
                                 catch (Exception ex)
                                 {
                                     await botClient.SendMessage(msg.Chat.Id,
-                                        $"Вы успешно купили {sItems4.Name} за {sItems4.Price}💰", ParseMode.Html);
+                                        $"Вы успешно купили {ItemsCommand.sItems4.Name} за {ItemsCommand.sItems4.Price}💰", ParseMode.Html);
                                 }
                             }
-                            else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {sItems4.Price}💰", ParseMode.Html);
+                            else await botClient.SendMessage(msg.Chat.Id,$"Вам нехватает средств для покупки предмета. Необходимо: {ItemsCommand.sItems4.Price}💰", ParseMode.Html);
                         }
                         break;
                 }
