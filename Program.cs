@@ -33,8 +33,8 @@ async Task OnMessage(Message msg, UpdateType type)
     if (msg.Text is null) return;
     var commandParts = msg.Text.Split(' ');
     var command = commandParts[0];
-    var argument = commandParts.Length == 2 ? commandParts[1] : null;
-    var defArgument = commandParts.Length == 3 ? commandParts[2] : null;
+    var argument = commandParts.Length >= 2 ? commandParts[1] : null;
+    var defArgument = commandParts.Length >= 3 ? commandParts[2] : null;
     if (msg.Text.StartsWith('/'))
     {
         switch (command)
@@ -107,6 +107,22 @@ async Task OnMessage(Message msg, UpdateType type)
                     {
                         await Task.Run(async () =>
                                 await bot.SendMessage(msg.Chat.Id, "Неверно указан ID предмета. Пример: /upgrade 1", ParseMode.Html)
+                        );
+                    }
+                }
+                break;
+            case "/craft":
+                if (argument is not null && defArgument is not null)
+                {
+                    try
+                    {
+                        await Task.Run(async () =>
+                            await itemsCommand.ItemCraft(bot, msg, Convert.ToInt32(argument), Convert.ToInt32(defArgument))
+                        );
+                    } catch (FormatException)
+                    {
+                        await Task.Run(async () =>
+                            await bot.SendMessage(msg.Chat.Id, "Неверно указана форма комманды. Пример: /craft money diamonds | /craft 1500 25", ParseMode.Html)
                         );
                     }
                 }
