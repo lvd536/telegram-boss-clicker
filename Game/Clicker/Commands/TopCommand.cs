@@ -24,7 +24,7 @@ public class TopCommand
                     {
                         if (index >= 50) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"\n{index}. {u.Username} - {u.Level}";
+                        else message += $"<blockquote>{index}. {u.Username}\n Level: {u.Level}\n Rank: {u.Rank}</blockquote>";
                         index++;
                     }
                     break;
@@ -36,7 +36,7 @@ public class TopCommand
                     {
                         if (index >= 50) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"\n{index}. {u.Username} - {u.Money}";
+                        else message += $"<blockquote>{index}. {u.Username}\n Money: {u.Money}\n Rank: {u.Rank}</blockquote>";
                         index++;
                     }
                     break;
@@ -48,7 +48,7 @@ public class TopCommand
                     {
                         if (index >= 50) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"\n{index}. {u.Username} - {u.Cashiers}";
+                        else message += $"<blockquote>{index}. {u.Username}\n Diamonds: {u.Cashiers}\n Rank: {u.Rank}</blockquote>";
                         index++;
                     }
                     break;
@@ -60,7 +60,7 @@ public class TopCommand
                     {
                         if (index >= 50) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"\n{index}. {u.Username} - {u.KilledBosses}";
+                        else message += $"<blockquote>{index}. {u.Username}\n Kills: {u.KilledBosses}\n Rank: {u.Rank}</blockquote>";
                         index++;
                     }
                     break;
@@ -72,7 +72,7 @@ public class TopCommand
                     {
                         if (index >= 50) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"\n{index}. {u.Username} - {u.Damage}";
+                        else message += $"<blockquote>{index}. {u.Username}\n Damage: {u.Damage}\n Rank: {u.Rank}</blockquote>";
                         index++;
                     }
                     break;
@@ -84,7 +84,7 @@ public class TopCommand
                     {
                         if (index >= 50) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"\n{index}. {u.Username} - {u.Elo}";
+                        else message += $"<blockquote>{index}. {u.Username}\n Elo: {u.Elo}\n Rank: {u.Rank}</blockquote>";
                         index++;
                     }
                     break;
