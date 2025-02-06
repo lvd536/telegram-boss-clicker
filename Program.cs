@@ -163,7 +163,7 @@ async Task OnCallbackQuery(Update update)
         case "ChangeName":
             await Task.Run(async () =>
                 await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id,
-                    "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/setname Nick | /setname lvd.</blockquote>", ParseMode.Html)
+                    "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/setname Nick | /setname lvd.\n⚠️ Максимальная длинна ника: 15 символов</blockquote>", ParseMode.Html)
             );
             break;
         case "Shop":
@@ -240,7 +240,7 @@ async Task OnCallbackQuery(Update update)
         case "ItemsCraft":
             await Task.Run(async () =>
                 await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id,
-                    "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/craft money diamonds | /craft 1500 25</blockquote>", ParseMode.Html)
+                    "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/craft money diamonds | /craft 1500 25\n⚠️ Минимальное кол-во для крафта: 100 монет, 10 алмазов</blockquote>", ParseMode.Html)
             );
             break;
     }
