@@ -23,7 +23,7 @@ public class TopCommand
                     foreach (var u in users)
                     {
                         if (index >= 50) break;
-                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Level}";
+                        if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"\n{index}. {u.Username} - {u.Level}";
                         index++;
                     }
@@ -35,7 +35,7 @@ public class TopCommand
                     foreach (var u in users)
                     {
                         if (index >= 50) break;
-                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Money}";
+                        if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"\n{index}. {u.Username} - {u.Money}";
                         index++;
                     }
@@ -47,7 +47,7 @@ public class TopCommand
                     foreach (var u in users)
                     {
                         if (index >= 50) break;
-                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Cashiers}";
+                        if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"\n{index}. {u.Username} - {u.Cashiers}";
                         index++;
                     }
@@ -59,7 +59,7 @@ public class TopCommand
                     foreach (var u in users)
                     {
                         if (index >= 50) break;
-                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.KilledBosses}";
+                        if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"\n{index}. {u.Username} - {u.KilledBosses}";
                         index++;
                     }
@@ -71,7 +71,7 @@ public class TopCommand
                     foreach (var u in users)
                     {
                         if (index >= 50) break;
-                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Damage}";
+                        if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"\n{index}. {u.Username} - {u.Damage}";
                         index++;
                     }
@@ -83,7 +83,7 @@ public class TopCommand
                     foreach (var u in users)
                     {
                         if (index >= 50) break;
-                        if (String.IsNullOrEmpty(u.Username)) message += $"\n{index}. None - {u.Elo}";
+                        if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"\n{index}. {u.Username} - {u.Elo}";
                         index++;
                     }
