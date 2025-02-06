@@ -22,7 +22,7 @@ public class TopCommand
                     users.Sort((a, b) => b.Level - a.Level);
                     foreach (var u in users)
                     {
-                        if (index >= 50) break;
+                        if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"<blockquote>{index}. {u.Username}\n Level: {u.Level}\n Rank: {u.Rank}</blockquote>";
                         index++;
@@ -34,7 +34,7 @@ public class TopCommand
                     users.Sort((a, b) => Convert.ToInt32(b.Money - a.Money));
                     foreach (var u in users)
                     {
-                        if (index >= 50) break;
+                        if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"<blockquote>{index}. {u.Username}\n Money: {u.Money}\n Rank: {u.Rank}</blockquote>";
                         index++;
@@ -46,7 +46,7 @@ public class TopCommand
                     users.Sort((a, b) => Convert.ToInt32(b.Cashiers - a.Cashiers));
                     foreach (var u in users)
                     {
-                        if (index >= 50) break;
+                        if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"<blockquote>{index}. {u.Username}\n Diamonds: {u.Cashiers}\n Rank: {u.Rank}</blockquote>";
                         index++;
@@ -58,7 +58,7 @@ public class TopCommand
                     users.Sort((a, b) => b.KilledBosses - a.KilledBosses);
                     foreach (var u in users)
                     {
-                        if (index >= 50) break;
+                        if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"<blockquote>{index}. {u.Username}\n Kills: {u.KilledBosses}\n Rank: {u.Rank}</blockquote>";
                         index++;
@@ -70,7 +70,7 @@ public class TopCommand
                     users.Sort((a, b) => Convert.ToInt32(b.Damage - a.Damage));
                     foreach (var u in users)
                     {
-                        if (index >= 50) break;
+                        if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"<blockquote>{index}. {u.Username}\n Damage: {u.Damage}\n Rank: {u.Rank}</blockquote>";
                         index++;
@@ -82,7 +82,7 @@ public class TopCommand
                     users.Sort((a, b) => Convert.ToInt32(b.Elo - a.Elo));
                     foreach (var u in users)
                     {
-                        if (index >= 50) break;
+                        if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
                         else message += $"<blockquote>{index}. {u.Username}\n Elo: {u.Elo}\n Rank: {u.Rank}</blockquote>";
                         index++;
