@@ -60,12 +60,20 @@ public class HelpCommand
             {
                 InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
                 InlineKeyboardButton.WithCallbackData("🦸Профиль", "Profile")
-            }
-            ,
+            },
             new []
             {
                 InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily"),
                 InlineKeyboardButton.WithCallbackData("📶Топ", "Top")
+            },
+            new []
+            {
+                InlineKeyboardButton.WithCallbackData("📋Список предметов", "ItemsList")
+            },
+            new []
+            {
+                InlineKeyboardButton.WithCallbackData("⏫Улучшить предмет", "ItemsUpgrade"),
+                InlineKeyboardButton.WithCallbackData("⚒️Скрафтить предмет", "ItemsCraft")
             }
         });
 

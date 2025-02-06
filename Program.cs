@@ -163,7 +163,7 @@ async Task OnCallbackQuery(Update update)
         case "ChangeName":
             await Task.Run(async () =>
                 await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id,
-                    "Чтобы изменить имя вам необохдимо написать: /setname Nick")
+                    "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/setname Nick | /setname lvd.</blockquote>", ParseMode.Html)
             );
             break;
         case "Shop":
@@ -224,6 +224,23 @@ async Task OnCallbackQuery(Update update)
         case "TopByElo":
             await Task.Run(async () =>
                 await topCommand.TopCmd(bot, update.CallbackQuery.Message ?? new Message(), 6)
+            );
+            break;
+        case "ItemsList":
+            await Task.Run(async () =>
+                await itemsCommand.ItemList(bot, update.CallbackQuery.Message ?? new Message())
+            );
+            break;
+        case "ItemsUpgrade":
+            await Task.Run(async () =>
+                await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id,
+                    "<blockquote>Чтобы улучшить предмет вам необохдимо написать:\n/upgrade itemId | /upgrade 1</blockquote>", ParseMode.Html)
+            );
+            break;
+        case "ItemsCraft":
+            await Task.Run(async () =>
+                await bot.SendMessage(update.CallbackQuery?.Message.Chat.Id,
+                    "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/craft money diamonds | /craft 1500 25</blockquote>", ParseMode.Html)
             );
             break;
     }
