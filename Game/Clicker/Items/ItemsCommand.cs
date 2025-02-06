@@ -180,7 +180,7 @@ public class ItemsCommand
             userData.Items.Add(newCraftedItem);
             await db.SaveChangesAsync();
 
-            await botClient.SendMessage(msg.Chat.Id, $"Вы успешно скрафтили предмет: {craftedItem.Name}!",
+            await botClient.SendMessage(msg.Chat.Id, $"Вы успешно скрафтили предмет: {craftedItem.Name} c шансом: {100 - failureChance * 100}%!",
                 ParseMode.Html);
         }
     }
