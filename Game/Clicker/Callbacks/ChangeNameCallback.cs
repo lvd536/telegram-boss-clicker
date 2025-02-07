@@ -23,10 +23,11 @@ public class ChangeNameCallback
                 {
                     userData.Username = newName;
                     await db.SaveChangesAsync();
-                    var keyboard = new InlineKeyboardMarkup(new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData("🦸Профиль", "Profile")
-                    });
+                    
+                    var keyboard = new InlineKeyboardMarkup()
+                        .AddButton("🦸Профиль", "Profile")
+                        .AddButton("Главное меню", "BackToMain");
+                        
                     await botClient.SendMessage(msg.Chat.Id, $"👏Ваше имя изменено на {userData.Username}",
                         ParseMode.Html, replyMarkup: keyboard);
                 }

@@ -243,6 +243,11 @@ async Task OnCallbackQuery(Update update)
                     "<blockquote>Чтобы изменить имя вам необохдимо написать:\n/craft money diamonds | /craft 1500 25\n⚠️ Минимальное кол-во для крафта: 100 монет, 10 алмазов</blockquote>", ParseMode.Html)
             );
             break;
+        case "BackToMain":
+            await Task.Run(async () =>
+                await startCommand.BackCmd(bot, update.CallbackQuery.Message ?? new Message())
+            );
+            break;
     }
 }
 

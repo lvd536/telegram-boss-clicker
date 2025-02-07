@@ -49,33 +49,20 @@ public class HelpCommand
             
             "<i>Удачной охоты на боссов! 🎯</i>";
         
-        var keyboard = new InlineKeyboardMarkup(new[]
-        {
-            new[]
-            {
-                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
-                InlineKeyboardButton.WithCallbackData("📝Установить имя", "ChangeName")
-            },
-            new []
-            {
-                InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
-                InlineKeyboardButton.WithCallbackData("🦸Профиль", "Profile")
-            },
-            new []
-            {
-                InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily"),
-                InlineKeyboardButton.WithCallbackData("📶Топ", "Top")
-            },
-            new []
-            {
-                InlineKeyboardButton.WithCallbackData("📋Список предметов", "ItemsList")
-            },
-            new []
-            {
-                InlineKeyboardButton.WithCallbackData("⏫Улучшить предмет", "ItemsUpgrade"),
-                InlineKeyboardButton.WithCallbackData("⚒️Скрафтить предмет", "ItemsCraft")
-            }
-        });
+        var keyboard = new InlineKeyboardMarkup()
+            .AddButton("🔫Клик!", "OnClick")
+            .AddButton("📝Установить имя", "ChangeName")
+            .AddNewRow()
+            .AddButton("🛒Магазин", "Shop")
+            .AddButton("🦸Профиль", "Profile")
+            .AddNewRow()
+            .AddButton("🤑Ежедневная награда", "Daily")
+            .AddButton("📶Топ", "Top")
+            .AddNewRow()
+            .AddButton("📋Список предметов", "ItemsList")
+            .AddNewRow()
+            .AddButton("⏫Улучшить предмет", "ItemsUpgrade")
+            .AddButton("⚒️Скрафтить предмет", "ItemsCraft");
 
         await botClient.SendMessage(
             chatId: msg.Chat.Id,

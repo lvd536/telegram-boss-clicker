@@ -48,24 +48,18 @@ public class Profile
                            $"👹Кол-во убитых боссов: {killsCount}\n" +
                            $"📚ChatId: {chatId}"
                 );
-
-                var keyboard = new InlineKeyboardMarkup(new[]
-                {
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
-                        InlineKeyboardButton.WithCallbackData("📝Установить имя", "ChangeName")
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData("🛒Магазин", "Shop"), 
-                        InlineKeyboardButton.WithCallbackData("🤑Ежедневная награда", "Daily")
-                    },
-                    new []
-                    {
-                        InlineKeyboardButton.WithCallbackData("📶Топ", "Top"), 
-                    }
-                });
+                var keyboard = new InlineKeyboardMarkup()
+                    .AddButton("🔫Клик!", "OnClick")
+                    .AddNewRow()
+                    .AddButton("📝Установить имя", "ChangeName")
+                    .AddNewRow()
+                    .AddButton("🛒Магазин", "Shop") 
+                    .AddNewRow()
+                    .AddButton("🤑Ежедневная награда", "Daily")
+                    .AddNewRow()
+                    .AddButton("📶Топ", "Top") 
+                    .AddNewRow()
+                    .AddButton("Главное меню", "BackToMain");
                 try
                 {
                     await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);

@@ -24,7 +24,7 @@ public class TopCommand
                     {
                         if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"<blockquote>{index}. {u.Username}\n Level: {u.Level}\n Rank: {u.Rank}</blockquote>";
+                        else message += $"<blockquote>{index}. {u.Username}\n Level: {u.Level}\n Rank: {u.Rank}</blockquote>\n";
                         index++;
                     }
                     break;
@@ -36,7 +36,7 @@ public class TopCommand
                     {
                         if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"<blockquote>{index}. {u.Username}\n Money: {u.Money}\n Rank: {u.Rank}</blockquote>";
+                        else message += $"<blockquote>{index}. {u.Username}\n Money: {u.Money}\n Rank: {u.Rank}</blockquote>\n";
                         index++;
                     }
                     break;
@@ -48,7 +48,7 @@ public class TopCommand
                     {
                         if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"<blockquote>{index}. {u.Username}\n Diamonds: {u.Cashiers}\n Rank: {u.Rank}</blockquote>";
+                        else message += $"<blockquote>{index}. {u.Username}\n Diamonds: {u.Cashiers}\n Rank: {u.Rank}</blockquote>\n";
                         index++;
                     }
                     break;
@@ -60,7 +60,7 @@ public class TopCommand
                     {
                         if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"<blockquote>{index}. {u.Username}\n Kills: {u.KilledBosses}\n Rank: {u.Rank}</blockquote>";
+                        else message += $"<blockquote>{index}. {u.Username}\n Kills: {u.KilledBosses}\n Rank: {u.Rank}</blockquote>\n";
                         index++;
                     }
                     break;
@@ -72,7 +72,7 @@ public class TopCommand
                     {
                         if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"<blockquote>{index}. {u.Username}\n Damage: {u.Damage}\n Rank: {u.Rank}</blockquote>";
+                        else message += $"<blockquote>{index}. {u.Username}\n Damage: {u.Damage}\n Rank: {u.Rank}</blockquote>\n";
                         index++;
                     }
                     break;
@@ -84,40 +84,25 @@ public class TopCommand
                     {
                         if (index > 10) break;
                         if (String.IsNullOrEmpty(u.Username)) u.Username = "None";
-                        else message += $"<blockquote>{index}. {u.Username}\n Elo: {u.Elo}\n Rank: {u.Rank}</blockquote>";
+                        else message += $"<blockquote>{index}. {u.Username}\n Elo: {u.Elo}\n Rank: {u.Rank}</blockquote>\n";
                         index++;
                     }
                     break;
             }
-            
-            var keyboard = new InlineKeyboardMarkup(new[]
-            {
-                new[]
-                {
-                    InlineKeyboardButton.WithCallbackData("🌟Топ по уровню", "Top"),
-                },
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("💰Топ по монетам", "TopByMoney")
-                },
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("💎Топ по алмазам", "TopByCashiers"), 
-                },
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("👿Топ по убитым боссам", "TopByKills")
-                },
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("🩸Топ по урону", "TopByDamage"), 
-                },
-                new []
-                {
-                    InlineKeyboardButton.WithCallbackData("📊Топ по ELO", "TopByElo"), 
-                }
-            });
-            
+            var keyboard = new InlineKeyboardMarkup()
+                .AddButton("🌟Топ по уровню", "Top")
+                .AddNewRow()
+                .AddButton("💰Топ по монетам", "TopByMoney")
+                .AddNewRow()
+                .AddButton("💎Топ по алмазам", "TopByCashiers")
+                .AddNewRow()
+                .AddButton("👿Топ по убитым боссам", "TopByKills")
+                .AddNewRow()
+                .AddButton("🩸Топ по урону", "TopByDamage")
+                .AddNewRow()
+                .AddButton("📊Топ по ELO", "TopByElo")
+                .AddNewRow()
+                .AddButton("Главное меню", "BackToMain");
             try
             {
                 await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);

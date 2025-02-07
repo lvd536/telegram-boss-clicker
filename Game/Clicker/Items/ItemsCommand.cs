@@ -57,7 +57,7 @@ public class ItemsCommand
                 foreach (var item in userData.Items)
                 {
                     message +=
-                        $"<blockquote> ID: {item.Id}\n Название: {item.Name}\n Уровень: {item.Level}\n Урон: {item.Damage}\n Цена: {item.Price}\n Стоимость улучшения: {item.Price * 2} </blockquote>";
+                        $"<blockquote> ID: {item.Id}\n Название: {item.Name}\n Уровень: {item.Level}\n Урон: {item.Damage}\n Цена: {item.Price}\n Стоимость улучшения: {item.Price * 2} </blockquote>\n";
                 }
 
                 await botClient.SendMessage(msg.Chat.Id, message, ParseMode.Html);
@@ -76,15 +76,11 @@ public class ItemsCommand
             {
                 if (userData.Money >= itemData.Price * 2)
                 {
-                    Console.WriteLine("Start damage" + itemData.Damage);
-                    Console.WriteLine("Start money: " + userData.Money);
                     userData.Money -= itemData.Price * 2;
                     itemData.Level += 1;
                     itemData.Damage = itemData.Damage * 2;
                     itemData.Price = itemData.Price * 2;
                     await db.SaveChangesAsync();
-                    Console.WriteLine("After " + itemData.Damage);
-                    Console.WriteLine("After money: " + userData.Money);
                     await botClient.SendMessage(msg.Chat.Id,
                         $"Вы успешно улучшили предмет {itemData.Name} до {itemData.Level} уровня за {itemData.Price} монет!",
                         ParseMode.Html);

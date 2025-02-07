@@ -36,14 +36,11 @@ public class ClickerCallback
                              $"🚪Комната этажа: {userData.BossRoom}\n" +
                              $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
-                        var keyboard = new InlineKeyboardMarkup(new[]
-                        {
-                            new[]
-                            {
-                                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
-                                InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
-                            }
-                        });
+                        var keyboard = new InlineKeyboardMarkup()
+                                .AddButton("🔫Клик!", "OnClick")
+                                .AddButton("🦸‍♂️Профиль", "Profile")
+                                .AddNewRow()
+                                .AddButton("Главное меню", "BackToMain");
                         try
                         {
                             await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
@@ -94,14 +91,11 @@ public class ClickerCallback
                             $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {userData.Cashiers}💎 и {result}"
                         );
 
-                        var keyboard = new InlineKeyboardMarkup(new[]
-                        {
-                            new[]
-                            {
-                                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
-                                InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
-                            }
-                        });
+                        var keyboard = new InlineKeyboardMarkup()
+                                .AddButton("🔫Клик!", "OnClick")
+                                .AddButton("🦸‍♂️Профиль", "Profile")
+                                .AddNewRow()
+                                .AddButton("Главное меню", "BackToMain");
                         
                         try
                         {
@@ -123,14 +117,11 @@ public class ClickerCallback
                               $"🚪Комната этажа: {userData.BossRoom}\n" +
                               $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
-                        var keyboard = new InlineKeyboardMarkup(new[]
-                        {
-                            new[]
-                            {
-                                InlineKeyboardButton.WithCallbackData("🔫Клик!", "OnClick"),
-                                InlineKeyboardButton.WithCallbackData("🦸‍♂️Профиль", "Profile")
-                            }
-                        });
+                        var keyboard = new InlineKeyboardMarkup()
+                                .AddButton("🔫Клик!", "OnClick")
+                                .AddButton("🦸‍♂️Профиль", "Profile")
+                                .AddNewRow()
+                                .AddButton("Главное меню", "BackToMain");
                         try
                         {
                             await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html,

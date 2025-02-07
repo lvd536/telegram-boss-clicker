@@ -13,19 +13,15 @@ public class Shop
 {
     public async Task ShopCmd(ITelegramBotClient botClient, Message msg)
     {
-        var keyboard = new InlineKeyboardMarkup(new[]
-        {
-            new[]
-            {
-                InlineKeyboardButton.WithCallbackData("🔨Молот Гнева Босса", "Shop1"),
-                InlineKeyboardButton.WithCallbackData("🗡️Кинжал Скрытого Тапа", "Shop2")
-            },
-            new[]
-            {
-                InlineKeyboardButton.WithCallbackData("🛡️Доспехи Непробиваемого Терпения", "Shop3"),
-                InlineKeyboardButton.WithCallbackData("⛓️‍Доспехи Потерянной Легенды", "Shop4")
-            }
-        });
+        var keyboard = new InlineKeyboardMarkup()
+                .AddButton("🔨Молот Гнева Босса", "Shop1")
+                .AddButton("🗡️Кинжал Скрытого Тапа", "Shop2")
+                .AddNewRow()
+                .AddButton("🛡️Доспехи Непробиваемого Терпения", "Shop3")
+                .AddButton("⛓️‍Доспехи Потерянной Легенды", "Shop4")
+                .AddNewRow()
+                .AddButton("Главное меню", "BackToMain");
+        
         var message = $"🛍️Магазин предметов: ";
         try
         {
