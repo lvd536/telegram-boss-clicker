@@ -40,8 +40,8 @@ public static class Boss
                         "Overlord", 
                         "Apex"
                     };
-                    string bossName = plly.BossFloor >= 10 ? _bossNames[rnd.Next(_bossNames.Length)] + " Босс Этажа" : _bossNames[rnd.Next(_bossNames.Length)];
-                    int bossLvl = plly.BossFloor >= 10 ? bossLvl = Math.Max(1, rnd.Next(plly.Level, plly.Level + 10)) : bossLvl = Math.Max(1, rnd.Next(plly.Level, plly.Level + 3));
+                    string bossName = plly.BossRoom >= 10 ? _bossNames[rnd.Next(_bossNames.Length)] + $" Босс {plly.BossFloor} Этажа" : _bossNames[rnd.Next(_bossNames.Length)];
+                    int bossLvl = plly.BossRoom >= 10 ? Math.Max(1, rnd.Next(plly.Level * plly.BossFloor, plly.Level * plly.BossFloor + 10)) : Math.Max(1, rnd.Next(plly.Level, plly.Level + 3));
                     int bossHealth = Math.Max(10, rnd.Next(bossLvl * 5, bossLvl * 25));
                     double bossExp = Math.Max(5, rnd.Next((bossLvl * bossHealth) / rnd.Next(2, 5), (bossLvl * bossHealth) * 2));
                     long bossMoney = Math.Max(10, rnd.Next(bossLvl * bossHealth, (bossLvl * bossHealth) * rnd.Next(2, 10)));

@@ -32,7 +32,8 @@ public class ClickerCallback
                         var message =
                             ($"👿Текущий босс: {userData.Boss.Name}.\n" +
                              $"🌟Уровень босса: {userData.Boss.Level}\n" +
-                             $"Этаж: {userData.BossFloor}" +
+                             $"Этаж: {userData.BossFloor}\n" +
+                             $"Комната этажа: {userData.BossRoom}\n" +
                              $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
                         var keyboard = new InlineKeyboardMarkup(new[]
@@ -70,8 +71,12 @@ public class ClickerCallback
                         userData.Rank = userRank;
                         userData.Elo = userElo;
                         userData.KilledBosses++;
-                        if (userData.BossFloor >= 10) userData.BossFloor = 0;
-                        else userData.BossFloor++;
+                        if (userData.BossRoom >= 10)
+                        {
+                            userData.BossRoom = 0;
+                            userData.BossFloor++;
+                        }
+                        else userData.BossRoom++;
 
                         userData.Boss = new Database.Boss
                         {
@@ -86,7 +91,7 @@ public class ClickerCallback
                         await db.SaveChangesAsync();
                         await LevelUp.LevelUpAsync(botClient, msg);
                         var message = (
-                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {userData.Cashiers}💎  и {result}"
+                            $"🎉 Вы победили {bossName}!\nПолучено: {bossMoney}💰, {userData.Cashiers}💎 и {result}"
                         );
 
                         var keyboard = new InlineKeyboardMarkup(new[]
@@ -114,7 +119,8 @@ public class ClickerCallback
                         var message =
                             ($"👿Вы нанесли боссу {userData.Boss.Name} {userData.Damage} урона.\n" +
                               $"🌟Уровень босса: {userData.Boss.Level}\n" +
-                              $"Этаж: {userData.BossFloor}" +
+                              $"Этаж: {userData.BossFloor}\n" +
+                              $"Комната этажа: {userData.BossRoom}\n" +
                               $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
                         var keyboard = new InlineKeyboardMarkup(new[]

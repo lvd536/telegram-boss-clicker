@@ -16,6 +16,7 @@ public class Player
     public long Cashiers { get; set; }
     public long Damage { get; set; }
     public int KilledBosses { get; set; }
+    public short BossRoom { get; set; }
     public short BossFloor { get; set; }
     public DateTime DailyGetTime { get; set; } = DateTime.Now.AddDays(-1);
     public Boss Boss { get; set; } = new Boss
