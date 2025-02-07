@@ -17,7 +17,6 @@ public static class Boss
                 var plly = await db.Users.FirstOrDefaultAsync(u => u.ChatId == msg.Chat.Id);
                 if (plly is not null && (plly.Boss == null || plly.Boss.Health <= 0 || string.IsNullOrEmpty(plly.Boss.Name)))
                 {
-                    Console.WriteLine("Create Boss");
                     string[] _bossNames = { 
                         "Marshal", 
                         "Hellsing", 
