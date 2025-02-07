@@ -32,6 +32,7 @@ public class ClickerCallback
                         var message =
                             ($"👿Текущий босс: {userData.Boss.Name}.\n" +
                              $"🌟Уровень босса: {userData.Boss.Level}\n" +
+                             $"Этаж: {userData.BossFloor}" +
                              $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
                         var keyboard = new InlineKeyboardMarkup(new[]
@@ -69,6 +70,8 @@ public class ClickerCallback
                         userData.Rank = userRank;
                         userData.Elo = userElo;
                         userData.KilledBosses++;
+                        if (userData.BossFloor >= 10) userData.BossFloor = 0;
+                        else userData.BossFloor++;
 
                         userData.Boss = new Database.Boss
                         {
@@ -111,6 +114,7 @@ public class ClickerCallback
                         var message =
                             ($"👿Вы нанесли боссу {userData.Boss.Name} {userData.Damage} урона.\n" +
                               $"🌟Уровень босса: {userData.Boss.Level}\n" +
+                              $"Этаж: {userData.BossFloor}" +
                               $"🩸Осталось: {userData.Boss.Health} ХП"
                             );
                         var keyboard = new InlineKeyboardMarkup(new[]
