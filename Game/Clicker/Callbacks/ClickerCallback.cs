@@ -40,7 +40,7 @@ public class ClickerCallback
                                 .AddButton("🔫Клик!", "OnClick")
                                 .AddButton("🦸‍♂️Профиль", "Profile")
                                 .AddNewRow()
-                                .AddButton("Главное меню", "BackToMain");
+                                .AddButton("👾Главное меню", "BackToMain");
                         try
                         {
                             await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);
@@ -95,7 +95,7 @@ public class ClickerCallback
                                 .AddButton("🔫Клик!", "OnClick")
                                 .AddButton("🦸‍♂️Профиль", "Profile")
                                 .AddNewRow()
-                                .AddButton("Главное меню", "BackToMain");
+                                .AddButton("👾Главное меню", "BackToMain");
                         
                         try
                         {
@@ -121,7 +121,7 @@ public class ClickerCallback
                                 .AddButton("🔫Клик!", "OnClick")
                                 .AddButton("🦸‍♂️Профиль", "Profile")
                                 .AddNewRow()
-                                .AddButton("Главное меню", "BackToMain");
+                                .AddButton("👾Главное меню", "BackToMain");
                         try
                         {
                             await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html,

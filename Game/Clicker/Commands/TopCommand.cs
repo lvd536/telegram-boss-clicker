@@ -102,7 +102,7 @@ public class TopCommand
                 .AddNewRow()
                 .AddButton("📊Топ по ELO", "TopByElo")
                 .AddNewRow()
-                .AddButton("Главное меню", "BackToMain");
+                .AddButton("👾Главное меню", "BackToMain");
             try
             {
                 await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);

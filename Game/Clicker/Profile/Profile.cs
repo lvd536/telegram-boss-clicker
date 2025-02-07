@@ -52,14 +52,12 @@ public class Profile
                     .AddButton("🔫Клик!", "OnClick")
                     .AddNewRow()
                     .AddButton("📝Установить имя", "ChangeName")
-                    .AddNewRow()
                     .AddButton("🛒Магазин", "Shop") 
                     .AddNewRow()
                     .AddButton("🤑Ежедневная награда", "Daily")
-                    .AddNewRow()
                     .AddButton("📶Топ", "Top") 
                     .AddNewRow()
-                    .AddButton("Главное меню", "BackToMain");
+                    .AddButton("👾Главное меню", "BackToMain");
                 try
                 {
                     await botClient.EditMessageText(msg.Chat.Id, msg.Id, message, ParseMode.Html, replyMarkup: keyboard);

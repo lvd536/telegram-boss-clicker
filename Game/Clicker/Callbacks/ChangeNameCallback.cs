@@ -26,7 +26,7 @@ public class ChangeNameCallback
                     
                     var keyboard = new InlineKeyboardMarkup()
                         .AddButton("🦸Профиль", "Profile")
-                        .AddButton("Главное меню", "BackToMain");
+                        .AddButton("👾Главное меню", "BackToMain");
                         
                     await botClient.SendMessage(msg.Chat.Id, $"👏Ваше имя изменено на {userData.Username}",
                         ParseMode.Html, replyMarkup: keyboard);
